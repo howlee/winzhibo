@@ -9,7 +9,10 @@
 namespace App\Console\commands;
 
 
+use App\Http\Controllers\PC\Live\LiveController;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 
 class VideoJsonCommands extends Command
 {
@@ -43,22 +46,47 @@ class VideoJsonCommands extends Command
      */
     public function handle()
     {
-        $url = '/m/live/subject/videos/all/1.json';
         try {
-            $ch = curl_init();
-            $url = env('AKQ')."/json/lives.json";
-            curl_setopt($ch, CURLOPT_URL,$url);
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($ch, CURLOPT_TIMEOUT, 20);
-            $server_output = curl_exec ($ch);
-            $code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-            curl_close ($ch);
-            if ($code >= 400 || empty($server_output)) {
-                return;
+            $prefix = env('AKQ');
+            $array = LiveController::VIDEO_ID_ARRAY;
+
+            foreach ($array as $t=>$id) {
+                $index = 1;
+                $lastPage = 1;
+                while($index <= $lastPage) {
+                    $url = $prefix . "/m/live/subject/videos/" . $id . "/$index.json";
+                    $server_output = self::execUrl($url);
+                    if (!empty($server_output)) {
+                        $json = json_decode($server_output, true);
+                        Storage::disk("public")->put("/static/json/subject/videos/$id/$index.json", $server_output);
+                        if (isset($json['page']['lastPage'])) {
+                            $lastPage = $json['page']['lastPage'];
+                        }
+                    }
+                    $index++;
+                }
             }
-            Storage::disk("public")->put("/static/json/lives.json", $server_output);
         } catch (\Exception $exception) {
             Log::error($exception);
         }
+    }
+
+    /**
+     * 执行url返回内容
+     * @param $url
+     * @return mixed|string
+     */
+    public static function execUrl($url) {
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL,$url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 20);
+        $server_output = curl_exec ($ch);
+        $code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        curl_close ($ch);
+        if ($code >= 400 || empty($server_output)) {
+            return "";
+        }
+        return $server_output;
     }
 }

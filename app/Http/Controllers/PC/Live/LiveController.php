@@ -25,7 +25,9 @@ class LiveController extends Controller
     const LIVE_HD_CODE_KEY = 'LIVE_HD_CODE_KEY';
     const TypeArray = ['football'=>1, 'basketball'=>2, 'other'=>3];
 
-    const VIDEO_ID_ARRAY = ['nba'=>1009, 'cba'=>1010, 'yingchao'=>1000, 'xijia'=>1003, 'dejia'=>1006, 'fajia'=>1005, 'yijia'=>1004, 'zhongchao'=>1002];
+    const VIDEO_ID_ARRAY = ['all'=>'all', 'other'=>'999', 'nba'=>1009, 'cba'=>1010, 'yingchao'=>1000, 'xijia'=>1003, 'dejia'=>1006, 'fajia'=>1005, 'yijia'=>1004, 'zhongchao'=>1002];
+    //const VIDEO_CN_ARRAY = ['all'=>'全部', 999=>'其他', 1009=>'NBA', 1010=>'CBA', 1000=>'英超', 1003=>'西甲', 1006=>'德甲', 1005=>'法甲', 1004=>'意甲', 1002=>'中超'];
+    const VIDEO_CN_ARRAY = ['all'=>'all', 'other'=>'其他', 'nba'=>'NBA', 'cba'=>'CBA', 'yingchao'=>'英超', 'xijia'=>'西甲', 'dejia'=>'德甲', 'fajia'=>'法甲', 'yijia'=>'意甲', 'zhongchao'=>'中超'];
     const SPORT_FOOTBALL = 1, SPORT_BASKETBALL = 2, SPORT_OTHER = 3;
 
     //===============================================================================//
@@ -43,8 +45,32 @@ class LiveController extends Controller
             $json = [];
         }
 
+        $imArray = [];
+
+        if (isset($json['matches'])) {
+            $matches = $json['matches'];
+            foreach ($matches as $time=>$array) {
+                foreach ($array as $key=>$match) {
+                    $isIm = false;
+                    $channels = $match['channels'];
+                    foreach ($channels as $channel) {
+                        if ($channel['impt'] == 2){
+                            $isIm = true;
+                        }
+                        break;
+                    }
+                    if ($isIm) {
+                        $imArray[] = $match;
+                    }
+                }
+            }
+        }
+
         $json['week_array'] = array('星期日','星期一','星期二','星期三','星期四','星期五','星期六');
         $json['check'] = 'index';
+        $json['imArray'] = $imArray;
+        $json['videos'] = $this->getVideos(['nba', 'yingchao', 'xijia', 'yijia', 'dejia']);
+        $json['type_cn'] = self::VIDEO_CN_ARRAY;
         return view('pc.index', $json);
     }
 
@@ -58,6 +84,9 @@ class LiveController extends Controller
         $json['matches'] = $footArray;
         $json['week_array'] = array('星期日','星期一','星期二','星期三','星期四','星期五','星期六');
         $json['check'] = 'football';
+        $json['type_cn'] = self::VIDEO_CN_ARRAY;
+        $json['videos'] = $this->getVideos(['yingchao', 'zhongchao', 'xijia', 'yijia', 'dejia']);
+        $json['title'] = '足球直播_英超直播_意甲直播_德甲直播_法甲直播_中超直播_亚洲直播_免费足球直播';
         return view('pc.index', $json);
     }
 
@@ -71,6 +100,9 @@ class LiveController extends Controller
         $json['matches'] = $matches;
         $json['week_array'] = array('星期日','星期一','星期二','星期三','星期四','星期五','星期六');
         $json['check'] = 'basketball';
+        $json['title'] = '篮球直播_篮球免费直播_NBA直播_CBA直播_NBA决赛直播_欧锦赛直播';
+        $json['videos'] = $this->getVideos(['nba', 'cba']);
+        $json['type_cn'] = self::VIDEO_CN_ARRAY;
         return view('pc.index', $json);
     }
 
@@ -130,6 +162,94 @@ class LiveController extends Controller
         $result['description'] = '';
 
         return view('pc.live.detail', $result);
+    }
+
+
+    /**
+     * 综合录像页面
+     * @param Request $request
+     * @param $page
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function videos(Request $request, $page = 1) {
+        $videos = $this->getVideoTypeByPage('all', $page);
+
+        $cache = Storage::get('/public/static/json/lives.json');
+        $json = json_decode($cache, true);
+        $liveMatches = [];
+        if (isset($json['matches'])) {
+            $matches = $json['matches'];
+            foreach ($matches as $time=>$matchArray) {
+                foreach ($matchArray as $match) {
+                    $liveMatches[] = $match;
+                    if (count($liveMatches) >= 30) break;
+                }
+                if (count($liveMatches) >= 30) break;
+            }
+        }
+
+        $videoArray = [];
+        if (isset($videos['matches'])) {
+            $vms = $videos['matches'];
+            foreach ($vms as $vt=>$vs) {
+                foreach ($vs as $video) {
+                    $videoArray[] = $video;
+                }
+            }
+        }
+        $result['page'] = $videos['page'];
+        $result['videos'] = $videoArray;
+        $result['matches'] = $liveMatches;
+        $result['week_array'] = array('星期日','星期一','星期二','星期三','星期四','星期五','星期六');
+        $result['check'] = 'video';
+        return view('pc.video.videos', $result);
+    }
+
+    //=========================================================  获取数据 =========================================================//
+
+    /**
+     * 获取第一页得录像数据
+     * @param $type
+     * @param $page
+     * @return array
+     */
+    private function getVideoTypeByPage($type, $page = 1) {
+        $array = self::VIDEO_ID_ARRAY;
+        if (!isset($array[$type])) {
+            return [];
+        }
+
+        try {
+            $id = $array[$type];
+            $cache = Storage::get('/public/static/json/subject/videos/' . $id . '/' . $page . '.json');
+            $json = json_decode($cache, true);
+        } catch (\Exception $exception) {
+            return [];
+        }
+        return $json;
+    }
+
+    /**
+     * 根据类型获取指定录像数组
+     * @param array $types
+     * @return array
+     */
+    private function getVideos(array $types) {
+        $array = [];
+
+        foreach ($types as $type) {
+            $videos = $this->getVideoTypeByPage($type);
+            if (!isset($videos['matches'])) continue;
+
+            $matches = $videos['matches'];
+            foreach ($matches as $time => $videoArray) {
+                foreach ($videoArray as $video) {
+                    $array[$type][] = $video;
+                }
+            }
+        }
+
+        return $array;
     }
 
     /**

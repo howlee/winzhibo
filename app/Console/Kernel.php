@@ -3,6 +3,7 @@
 namespace App\Console;
 
 use App\Console\commands\LiveJsonCommands;
+use App\Console\commands\VideoJsonCommands;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -15,6 +16,7 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         LiveJsonCommands::class,//定时获取所有直播json
+        VideoJsonCommands::class,//同步录像json
     ];
 
     /**
@@ -26,6 +28,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('live_json_cache:run')->everyMinute();
+        $schedule->command('video_json_cache:run')->everyFiveMinutes();
     }
 
     /**
