@@ -26,6 +26,10 @@ Route::group(["namespace" => 'Live'], function () {
 
     Route::get('/live/{type}/{mid}.html',"LiveController@detail");//足球直播页
 
+    Route::get("/socket/index.html", function () {
+        return view('socket.index');
+    });
+
     //============================================================================================================================//
     //直播相关静态化
     Route::get('/live/player-json/{id}', 'LiveController@staticLiveUrl');//静态化 线路json
