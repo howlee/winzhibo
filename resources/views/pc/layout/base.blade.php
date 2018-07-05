@@ -52,7 +52,7 @@
     {{--</div>--}}
 
     <div id="zc_foot">
-        <p>win直播 <a href="http://www.qqzhibo.net/sitemap.xml" target="_blank">sitemap</a></p>
+        {{--<p>win直播 <a href="http://www.qqzhibo.net/sitemap.xml" target="_blank">sitemap</a></p>--}}
         <p>视频信号整理自互联网，如有侵权请告知我们 我们会在第一时间删除</p>
     </div>
 </body>

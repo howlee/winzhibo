@@ -8,7 +8,7 @@
                     @foreach($videos as $video)
                         <?php $info = date('m月d日 H:i', $video['time']) .' ' . $video['lname'] . ' ' . $video['hname'] . ' VS ' . $video['aname']; ?>
                         <li>
-                            <a class="v" href="http://www.qqzhibo.net/video/changguisai/100368.html" title="{{$info}}" target="_blank">{{$info}}</a>
+                            <a class="v" href="/live/videos/detail/{{$video['id']}}.html" title="{{$info}}" target="_blank">{{$info}}</a>
                         </li>
                     @endforeach
                 </ul>
@@ -30,7 +30,6 @@
                                 } else {
                                     $info = $match['win_lname'] . ' ' . $match['hname'] . ' VS ' . $match['aname'];
                                 }
-
                             ?>
                             <li>
                                 <a href="/live/{{$type}}/{{$match['mid']}}.html" class="hei" target="_blank">{{$info}}</a>

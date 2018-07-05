@@ -139,7 +139,39 @@ class LiveController extends Controller
         if (!isset($match)) {
             return abort(404);
         }
+        return $this->detailMatchHtml($sport, $match);
+//        if ($sport == 3) {
+//            $league = $match['lname'];
+//            if (empty($league)) {
+//                $league = $match['project'];
+//            }
+//        } else {
+//            $league = $match['lname'];
+//            if (empty($league)) {
+//                $league = $match['win_lname'];
+//            }
+//        }
+//        $info = $league . ' ' . $match['hname'] . (empty($match['aname']) ? '' : (' VS ' . $match['aname']) ) ;
+//
+//        $result['match'] = $match;
+//        $result['info'] = $info;
+//        $result['league'] = $league;
+//
+//        $result['title'] = $info;
+//        $result['keywords'] = '';
+//        $result['description'] = '';
+//
+//        return view('pc.live.detail', $result);
+    }
 
+
+    /**
+     * 直播终端
+     * @param $sport
+     * @param $match
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function detailMatchHtml($sport, $match) {
         if ($sport == 3) {
             $league = $match['lname'];
             if (empty($league)) {
@@ -203,6 +235,21 @@ class LiveController extends Controller
         $result['week_array'] = array('星期日','星期一','星期二','星期三','星期四','星期五','星期六');
         $result['check'] = 'video';
         return view('pc.video.videos', $result);
+    }
+
+
+    public function videoDetailHtml(array $video) {
+        $league = $video['lname'];
+        $info = $league . ' ' . $video['hname'] . (empty($video['aname']) ? '' : (' VS ' . $video['aname']) ) ;
+
+        $result['match'] = $video;
+        $result['info'] = $info;
+        $result['league'] = $league;
+
+        $result['title'] = $info;
+        $result['keywords'] = '';
+        $result['description'] = '';
+        return view('pc.live.detail', $result);
     }
 
     //=========================================================  获取数据 =========================================================//
