@@ -5,6 +5,7 @@ namespace App\Console;
 use App\Console\commands\LiveDetailHtmlCommands;
 use App\Console\commands\LiveIndexHtmlCommands;
 use App\Console\commands\LiveJsonCommands;
+use App\Console\commands\LiveJsonWapCommands;
 use App\Console\commands\VideoDetailHtmlCommands;
 use App\Console\commands\VideoIndexHtmlCommands;
 use App\Console\commands\VideoJsonCommands;
@@ -20,6 +21,7 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         LiveJsonCommands::class,//定时获取所有直播json
+        LiveJsonWapCommands::class,//定时获取wap所有直接json
         VideoJsonCommands::class,//同步录像json
 
         LiveDetailHtmlCommands::class,//直播终端页html缓存
