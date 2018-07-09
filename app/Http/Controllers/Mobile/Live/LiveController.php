@@ -42,6 +42,22 @@ class LiveController extends Controller
         if (!isset($json) || !isset($json['matches'])) {
             return "";
         }
+        $array = $json['matches'];
+        $footballArray = [];
+        $basketArray = [];
+        foreach ($array as $date=>$matches) {
+            foreach ($matches as $match) {
+                $sport = $match['sport'];
+                if ($sport == 1) {
+                    $footballArray[$date][] = $match;
+                } else if ($sport == 2){
+                    $basketArray[$date][] = $match;
+                }
+            }
+        }
+
+        $json['footballs'] = $footballArray;
+        $json['basketballs'] = $basketArray;
         return view('mobile.live.index', $json);
     }
 

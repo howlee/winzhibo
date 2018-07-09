@@ -8,9 +8,9 @@
     <meta charset="utf-8" >
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
     <meta name="applicable-device" content="mobile" >
-    <link href="http://m.leqiuba.cc/style/style.css" rel="stylesheet" >
-    <link href="http://m.leqiuba.cc/style/font-awesome.min.css" rel="stylesheet">
-    <script src="http://m.leqiuba.cc/js/jquery.min.js" charset="utf-8"></script>
+    <link href="/css/mobile/style.css" rel="stylesheet" >
+    <link href="/css/mobile/font-awesome.min.css" rel="stylesheet">
+    <script type="text/javascript" src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
     <meta HTTP-EQUIV="Pragma" CONTENT="no-cache">
     <meta HTTP-EQUIV="Cache-Control" CONTENT="no-cache">
     <meta HTTP-EQUIV="Expires" CONTENT="0">
@@ -23,7 +23,6 @@
         </div>
         <div class="module saishi shaixuan">
             <span value="all" class="current">全部</span>
-            <span value="shijiebei">世界杯</span>
             <span value="football">足球</span>
             <span value="basketball">篮球</span>
         </div>
@@ -65,46 +64,7 @@
         </div>
 
         <div class="game-list" style="display:none;">
-            @foreach($matches as $time=>$array)
-                <h2 class="today">{{$time}}</h2>
-                @foreach($array as $match)
-                    <?php
-                        $sport = $match['sport'];
-                        $lid = $match['lid'];
-                        $pName = $sport == 1 ? 'football' : ($sport == 2 ? 'basketball' : 'other');
-                    ?>
-                    @continue($lid != 57)
-                    <a href="https://www.aikq.cc/m/live/{{$pName}}/{{$match['mid']}}.html" class="game-item cPbtn" style="text-align: center;">
-                        @if($sport == 3)
-                            <p style="font-weight:bold;">  {{$match['hname'] . (empty($match['aname']) ? '' : (' VS ' . $match['aname']) ) }}</p>
-                            <p class="time" style=""><span>{{substr($match['time'], 10, 6)}}</span></p>
-                        @else
-                            <div class="team-left">
-                                <img src="{{!empty($match['home']['lg_icon']) ? ('http://static.liaogou168.com' . $match['home']['lg_icon']) : '//static.liaogou168.com/img/icon_team_default.png'}}" >
-                                <p style="font-weight:bold;">  {{$match['hname']}}</p>
-                            </div>
-                            <div class="game-info">
-                                <div class="team-score">
-                                    <bifen class="id126275">
-                                        <p class="score-num gray"><span class="score score126275"> VS </span></p>
-                                    </bifen>
-                                    <p class="live" style="">{{$match['win_lname']}} </p>
-                                    <p class="time" style=""><span>{{substr($match['time'], 10, 6)}}</span></p>
-                                </div>
-                            </div>
-                            <div class="team-right">
-                                <img src="{{!empty($match['away']['lg_icon']) ? ('http://static.liaogou168.com' . $match['away']['lg_icon']) : '//static.liaogou168.com/img/icon_team_default.png'}}" >
-                                <p style="font-weight:bold;">{{$match['aname']}}</p>
-                            </div>
-                            <div class="clear"></div>
-                        @endif
-                    </a>
-                @endforeach
-            @endforeach
-        </div>
-
-        <div class="game-list" style="display:none;">
-            @foreach($matches as $time=>$array)
+            @foreach($footballs as $time=>$array)
                 <h2 class="today">{{$time}}</h2>
                 @foreach($array as $match)
                     <?php
@@ -142,7 +102,7 @@
         </div>
 
         <div class="game-list" style="display:none;">
-            @foreach($matches as $time=>$array)
+            @foreach($basketballs as $time=>$array)
                 <h2 class="today">{{$time}}</h2>
                 @foreach($array as $match)
                     <?php
@@ -197,10 +157,8 @@
             $("div.game-list").hide();
             if (val == 'all') {
                 $("div.game-list:first").show();
-            } else if (val == 'shijiebei') {
-                $("div.game-list:eq(1)").show();
             } else if (val == 'football') {
-                $("div.game-list:eq(2)").show();
+                $("div.game-list:eq(1)").show();
             } else if (val == 'basketball') {
                 $("div.game-list:last").show();
             }

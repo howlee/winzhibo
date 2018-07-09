@@ -8,9 +8,9 @@
     <meta charset="utf-8" >
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
     <meta name="applicable-device" content="mobile" >
-    <link href="http://m.leqiuba.cc/style/style.css" rel="stylesheet" >
-    <link href="http://m.leqiuba.cc/style/font-awesome.min.css" rel="stylesheet">
-    <script src="http://m.leqiuba.cc/js/jquery.min.js" charset="utf-8"></script>
+    <link href="/css/mobile/style.css" rel="stylesheet" >
+    <link href="/css/mobile/font-awesome.min.css" rel="stylesheet">
+    <script type="text/javascript" src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
     <meta HTTP-EQUIV="Pragma" CONTENT="no-cache">
     <meta HTTP-EQUIV="Cache-Control" CONTENT="no-cache">
     <meta HTTP-EQUIV="Expires" CONTENT="0">
@@ -27,10 +27,15 @@
                 <div>
                 @foreach($array as $match)
                     <?php
-                        $sport = $match['sport'];
-                        $pName = $sport == 1 ? 'football' : ($sport == 2 ? 'basketball' : 'other');
+                        $mid = $match['id'];
+                        if (strlen($mid) < 4) {
+                            $path = "";
+                        } else {
+                            $path = 'https://www.aikq.cc/m/live/subject/video/' . substr($mid, 0, 2) . '/' . substr($mid, 2, 4) . '/' . $mid .'.html';
+                        }
                     ?>
-                    <a href="https://www.aikq.cc/m/live/{{$pName}}/{{$match['mid']}}.html" class="game-item cPbtn" style="text-align: center;">
+                    @continue(empty($path))
+                    <a href="{{$path}}" class="game-item cPbtn" style="text-align: center;">
                         <div class="team-left">
                             <img src="{{!empty($match['hicon']) ? ($match['hicon']) : '//static.liaogou168.com/img/icon_team_default.png'}}" >
                             <p style="font-weight:bold;">  {{$match['hname']}}</p>
