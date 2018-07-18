@@ -4,7 +4,7 @@
         <div class="left l" style="width: 960px;">
             <div class="live" style="width: 940px;">
                 <h2>{{substr($match['time'], 0, 10)}} {{$info}}</h2>
-                <div class="tip">如果以下信号都无效，请进入<a href="/">win直播</a>主页查看最新直播信号 </div>
+                <div class="tip">如果以下信号都无效，请进入<a href="/">球探直播</a>主页查看最新直播信号 </div>
                 <div class="channel">
                     <p>【站外直播】： <a href="http://www.aikq.cc/live/spPlayer/player-{{$match['mid']}}-{{$match['sport']}}.html" target="_blank">高清直播</a></p>
                 </div>

@@ -19,7 +19,7 @@
 <div class="container">
     <div class="wrap">
         <div class="header">
-            <a href="http://m.leqiuba.cc"><img src="http://m.leqiuba.cc/pic/logo.png"/></a>
+            <a href="/m/index.html"><img src="/img/mobile/wap_logo.png"/></a>
         </div>
         <div class="module saishi shaixuan">
             <span value="all" class="current">全部</span>

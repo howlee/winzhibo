@@ -48,13 +48,13 @@ class Kernel extends ConsoleKernel
 
         $schedule->command('wap_live_json_cache:run')->everyMinute();//定时获取wap所有直接json
 
-        $schedule->command('live_index_html:run')->everyFiveMinutes();//直播终端页html缓存
-        $schedule->command('live_detail_html:run')->everyFiveMinutes();//pc首页html静态化
+        $schedule->command('live_index_html:run')->everyFiveMinutes();//pc首页html静态化
+        $schedule->command('live_detail_html:run')->everyMinute();//直播终端页html缓存
         $schedule->command('video_index_html:run')->everyTenMinutes();//录像页面html静态化
         $schedule->command('video_detail_html:run')->everyTenMinutes();//录像终端html静态化
 
         $schedule->command('wap_index_cache:run')->everyMinute();//手机首页静态化
-        $schedule->command('wap_video_cache:run')->everyMinute();//手机录像静态化
+        $schedule->command('wap_video_cache:run')->everyFiveMinutes();//手机录像静态化
     }
 
     /**

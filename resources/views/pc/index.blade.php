@@ -62,7 +62,7 @@
             @if(isset($videos))
                 @foreach($videos as $vt=>$videoArray)
                     <div class="box">
-                        <h2>{{isset($type_cn[$vt]) ? $type_cn[$vt] : ''}}视频录像<a class="more" href="/videos">+更多</a></h2>
+                        <h2>{{isset($type_cn[$vt]) ? $type_cn[$vt] : ''}}视频录像<a class="more" href="/live/videos.html">+更多</a></h2>
                         <ul id="content_zuqiu">
                             @foreach($videoArray as $video)
                                 <?php $time = date('m-d H:i', $video['time']); ?>

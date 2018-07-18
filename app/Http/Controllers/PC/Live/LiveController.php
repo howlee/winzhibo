@@ -192,7 +192,6 @@ class LiveController extends Controller
         $result['title'] = $info;
         $result['keywords'] = '';
         $result['description'] = '';
-
         return view('pc.live.detail', $result);
     }
 

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>win直播-{{empty($title) ? '足球直播_NBA直播_世界杯直播_西甲直播_英超直播_免费直播' : $title}}</title>
+    <title>球探直播-{{empty($title) ? '足球直播_NBA直播_世界杯直播_西甲直播_英超直播_免费直播' : $title}}</title>
     <meta name="keywords" content="{{empty($keywords) ? '足球直播,世界杯直播,NBA直播,五星体育,CCTV5在线直播' : $keywords}}">
     <meta name="description" content="{{empty($description) ? '免费的体育直播网站。高清直播足球、NBA篮球、世界杯等比赛。' : $description}}">
     <link href="/css/pc/style.css" type="text/css" rel="stylesheet" />
@@ -13,7 +13,7 @@
     <div id="zc_head">
         <div class="head">
             <div class="logo l">
-                <a href="http://www.qqzhibo.net/"><img src="http://www.qqzhibo.net/logo.gif" alt="win直播"></a>
+                <a href="/"><img src="/img/pc/pc_logo.png" alt="球探直播"></a>
             </div>
         </div>
         <div class="nav">
@@ -52,7 +52,7 @@
     {{--</div>--}}
 
     <div id="zc_foot">
-        {{--<p>win直播 <a href="http://www.qqzhibo.net/sitemap.xml" target="_blank">sitemap</a></p>--}}
+        {{--<p>球探直播 <a href="http://www.qqzhibo.net/sitemap.xml" target="_blank">sitemap</a></p>--}}
         <p>视频信号整理自互联网，如有侵权请告知我们 我们会在第一时间删除</p>
     </div>
 </body>

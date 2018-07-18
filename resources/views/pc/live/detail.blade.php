@@ -3,19 +3,19 @@
     <div id="zc_main">
         <div class="left l" style="width: 960px;">
             <div class="live" style="width: 940px;">
-                <h2>{{date('Y-m-d H:i',  $match['time'])}} {{$info}}</h2>
-                <div class="tip">如果以下信号都无效，请进入<a href="/">win直播</a>主页查看最新直播信号 </div>
+                <h2>{{isset($match['time']) ? substr($match['time'], 0, 16) : ''}} {{$info}}</h2>
+                <div class="tip">如果以下信号都无效，请进入<a href="/">球探直播</a>主页查看最新直播信号 </div>
                 <div class="channel">
-                    <p>【站外录像】： <a href="{{\App\Http\Controllers\PC\CommonTool::subjectLink($match['id'], 'video')}}" target="_blank">高清录像</a></p>
+                    <p>【站外录像】： <a href="{{\App\Http\Controllers\PC\CommonTool::subjectLink($match['mid'], 'video')}}" target="_blank">高清录像</a></p>
                 </div>
             </div>
             <div class="box" style="width: 960px;">
-                <h3>{{date('Y-m-d H:i',  $match['time'])}} {{$info}}</h3>
+                <h3>{{isset($match['time']) ? substr($match['time'], 0, 16) : ''}} {{$info}}</h3>
                 <div class="info">
                     @if($match['sport'] != 3)
                     <p>对阵双方：主队：{{$match['hname']}}　客队：{{$match['aname']}}</p>
                     @endif
-                    <p>开赛时间：{{date('Y-m-d H:i',  $match['time'])}}</p>
+                    <p>开赛时间：{{isset($match['time']) ? substr($match['time'], 0, 16) : ''}}</p>
                     <p>比赛时长：2小时</p>
                 </div>
             </div>

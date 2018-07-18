@@ -16,6 +16,7 @@ class CommonTool
     const kSportFootball = 1, kSportBasketball = 2;//1：足球，2：篮球，其他待添加。
 
     public static function subjectLink($id, $type) {
+        $id = $id . '';
         $len = strlen($id);
         if ($len < 4) {
             return "";
