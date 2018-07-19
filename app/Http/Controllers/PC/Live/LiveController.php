@@ -184,7 +184,6 @@ class LiveController extends Controller
             }
         }
         $info = $league . ' ' . $match['hname'] . (empty($match['aname']) ? '' : (' VS ' . $match['aname']) ) ;
-
         $result['match'] = $match;
         $result['info'] = $info;
         $result['league'] = $league;
@@ -240,7 +239,7 @@ class LiveController extends Controller
     public function videoDetailHtml(array $video) {
         $league = $video['lname'];
         $info = $league . ' ' . $video['hname'] . (empty($video['aname']) ? '' : (' VS ' . $video['aname']) ) ;
-
+        $video['time'] = date('Y-m-d H:i:s', $video['time']);
         $result['match'] = $video;
         $result['info'] = $info;
         $result['league'] = $league;
