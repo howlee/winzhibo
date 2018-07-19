@@ -247,7 +247,7 @@ class LiveController extends Controller
         $result['title'] = $info;
         $result['keywords'] = '';
         $result['description'] = '';
-        return view('pc.live.detail', $result);
+        return view('pc.video.detail', $result);
     }
 
     //=========================================================  获取数据 =========================================================//
