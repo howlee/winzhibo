@@ -67,8 +67,8 @@
                             @foreach($videoArray as $video)
                                 <?php $time = date('m-d H:i', $video['time']); ?>
                                 <li>
-                                    <a href="{{\App\Http\Controllers\PC\CommonTool::subjectLink($video['id'], 'video')}}" class="hei" target="_blank">{{$video['hname'] . ' VS ' . $video['aname']}}</a>
-                                    <a href="{{\App\Http\Controllers\PC\CommonTool::subjectLink($video['id'], 'video')}}" class="ml5" target="_blank">录像</a>
+                                    <a href="/live/videos/detail/{{$video['id']}}.html" class="hei" target="_blank">{{$video['hname'] . ' VS ' . $video['aname']}}</a>
+                                    <a href="/live/videos/detail/{{$video['id']}}.html{{--\App\Http\Controllers\PC\CommonTool::subjectLink($video['id'], 'video')--}}" class="ml5" target="_blank">录像</a>
                                 </li>
                             @endforeach
                         </ul>
