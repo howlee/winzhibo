@@ -8,6 +8,7 @@
     <meta charset="utf-8" >
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
     <meta name="applicable-device" content="mobile" >
+    <link href="{{env('CDN_URL')}}/css/pc/style.css" type="text/css" rel="stylesheet" />
     <link href="/css/mobile/style.css" rel="stylesheet" >
     <link href="/css/mobile/font-awesome.min.css" rel="stylesheet">
     <script type="text/javascript" src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>

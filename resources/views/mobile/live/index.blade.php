@@ -7,6 +7,7 @@
     <meta name="description" content="是一个免费高清体育赛事Jrs直播网站。在这里能看高清NBA直播、英超直播和西甲直播，低调看直播来就够了！">
     <meta charset="utf-8" >
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <link href="{{env('CDN_URL')}}/css/pc/style.css" type="text/css" rel="stylesheet" />
     <meta name="applicable-device" content="mobile" >
     <link href="/css/mobile/style.css" rel="stylesheet" >
     <link href="/css/mobile/font-awesome.min.css" rel="stylesheet">

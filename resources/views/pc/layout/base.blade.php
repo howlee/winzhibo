@@ -5,7 +5,8 @@
     <title>球探直播-{{empty($title) ? '足球直播_NBA直播_世界杯直播_西甲直播_英超直播_免费直播' : $title}}</title>
     <meta name="keywords" content="{{empty($keywords) ? '足球直播,世界杯直播,NBA直播,五星体育,CCTV5在线直播' : $keywords}}">
     <meta name="description" content="{{empty($description) ? '免费的体育直播网站。高清直播足球、NBA篮球、世界杯等比赛。' : $description}}">
-    <link href="/css/pc/style.css" type="text/css" rel="stylesheet" />
+    <link rel="Shortcut Icon" data-ng-href="{{env('CDN_URL')}}/img/ico.ico" href="{{env('CDN_URL')}}/img/ico.ico">
+    <link href="{{env('CDN_URL')}}/css/pc/style.css" type="text/css" rel="stylesheet" />
     @yield('css')
 </head>
 
