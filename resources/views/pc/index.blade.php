@@ -10,7 +10,7 @@
                 <div class="rec_match">
                     @foreach($imArray as $match)
                         <?php $sport = $match['sport']; $type = $sport == 1 ? 'football' : ($sport == 2 ? 'basketball' : 'other'); ?>
-                        <a href="/live/{{$type}}/{{$match['mid']}}.html" title="{{date('m月d日 H:i')}} {{$match['win_lname']}} {{$match['hname']}}VS{{$match['aname']}}" target="_blank">{{$match['hname']}} VS {{$match['aname']}}</a>
+                        <a href="/live/{{$type}}/{{$match['mid']}}.html" title="{{date('m月d日 H:i', strtotime($match['time']))}} {{$match['win_lname']}} {{$match['hname']}}VS{{$match['aname']}}" target="_blank">{{$match['hname']}} VS {{$match['aname']}}</a>
                     @endforeach
                     <div class="c"></div>
                 </div>
@@ -41,7 +41,7 @@
                         if (!empty($match['aname'])) {
                             $matchInfo = $matchInfo . ' VS ' . $match['aname'];
                         }
-                        $m_title = date('m月d日 H:i') . ' ' . $sportCn . ' ' . $matchInfo . '直播';
+                        $m_title = date('m月d日 H:i', strtotime($match['time'])) . ' ' . $sportCn . ' ' . $matchInfo . '直播';
                         ?>
                         <li>
                             <div class="tit">
