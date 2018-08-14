@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use App\Console\aikq\LiveBreakCommands;
 use App\Console\commands\LiveDetailHtmlCommands;
 use App\Console\commands\LiveIndexHtmlCommands;
 use App\Console\commands\LiveJsonCommands;
@@ -33,6 +34,9 @@ class Kernel extends ConsoleKernel
 
         WapIndexHtmlCommands::class,//手机首页静态化
         WapVideoHtmlCommands::class,//手机录像静态化
+
+        //爱看球直播线路检查
+        LiveBreakCommands::class,
     ];
 
     /**
@@ -55,6 +59,9 @@ class Kernel extends ConsoleKernel
 
         $schedule->command('wap_index_cache:run')->everyMinute();//手机首页静态化
         $schedule->command('wap_video_cache:run')->everyFiveMinutes();//手机录像静态化
+
+
+        $schedule->command('check_live_break:run')->everyMinute();//检查直播流是否中断
     }
 
     /**

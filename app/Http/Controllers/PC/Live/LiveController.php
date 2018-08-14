@@ -141,12 +141,12 @@ class LiveController extends Controller
         }
         return $this->detailMatchHtml($sport, $match);
 //        if ($sport == 3) {
-//            $league = $match['lname'];
+//            $league = $match['league_name'];
 //            if (empty($league)) {
 //                $league = $match['project'];
 //            }
 //        } else {
-//            $league = $match['lname'];
+//            $league = $match['league_name'];
 //            if (empty($league)) {
 //                $league = $match['win_lname'];
 //            }
@@ -173,12 +173,12 @@ class LiveController extends Controller
      */
     public function detailMatchHtml($sport, $match) {
         if ($sport == 3) {
-            $league = $match['lname'];
+            $league = $match['league_name'];
             if (empty($league)) {
                 $league = $match['project'];
             }
         } else {
-            $league = $match['lname'];
+            $league = $match['league_name'];
             if (empty($league)) {
                 $league = $match['win_lname'];
             }
