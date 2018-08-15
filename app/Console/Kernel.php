@@ -37,6 +37,7 @@ class Kernel extends ConsoleKernel
 
         //爱看球直播线路检查
         LiveBreakCommands::class,
+        DeleteExpireFileCommand::class,//删除无用过期文件
     ];
 
     /**
