@@ -12,6 +12,7 @@ namespace App\Console\aikq;
 use App\Http\Controllers\Vendor\Weixin\WeixinTampleMessage;
 use App\Models\Aikq\BasketMatch;
 use App\Models\Aikq\LiveChannelLog;
+use App\Models\Aikq\LiveDuty;
 use App\Models\Aikq\Match;
 use App\Models\Aikq\MatchLive;
 use App\Models\Aikq\MatchLiveChannel;
@@ -129,7 +130,7 @@ class LiveBreakCommands extends Command
         }
 
         try {
-            $log->save();//连续三次断流的话，则记录日志。
+            //$log->save();//连续三次断流的话，则记录日志。
         } catch (\Exception $exception) {
             dump($exception);
         }
@@ -145,10 +146,15 @@ class LiveBreakCommands extends Command
         if ($show != MatchLiveChannel::kShow) {
             return;//不显示的线路不提醒
         }
-        //$first = "手机端直播推流中断啦。";
-        $keyword1 = $match['hname']." VS ".$match['aname'];
-        $keyword2 = "线路名称《" . $match['ch_name'] ."》";
-        WeixinTampleMessage::liveTip($this->getWxApp(),"oxCF5w6OQj5mvpu4hKWqCeoKFqCk", $first, $keyword1, $keyword2);
+        $now = date('Y-m-d H:i');
+        $query = LiveDuty::query()->where('start_date', '>=', $now);
+        $duties = $query->where('end_date', '<=', $now);
+        foreach ($duties as $duty) {
+            $openid = $duty->openid;
+            $keyword1 = $match['hname']." VS ".$match['aname'];
+            $keyword2 = "线路名称《" . $match['ch_name'] ."》";
+            WeixinTampleMessage::liveTip($this->getWxApp(), $openid, $first, $keyword1, $keyword2);
+        }
     }
 
     /**
