@@ -54,24 +54,28 @@ class LiveBreakCommands extends Command
      * @return mixed
      */
     public function handle() {
+        $now = date('Y-m-d H:i');
+        $query = LiveDuty::query()->where('start_date', '<=', $now);
+        $duties = $query->where('end_date', '>=', $now)->get();
+
         $footballLives = $this->getLiveChannels(MatchLive::kSportFootball);
         foreach ($footballLives as $football) {
-            $this->saveLiveLog($football, MatchLive::kSportFootball);
+            $this->saveLiveLog($football, MatchLive::kSportFootball, $duties);
         }
 
         $basketLives = $this->getLiveChannels(MatchLive::kSportBasketball);
         foreach ($basketLives as $basketLive) {
-            $this->saveLiveLog($basketLive, MatchLive::kSportBasketball);
+            $this->saveLiveLog($basketLive, MatchLive::kSportBasketball, $duties);
         }
     }
-
 
     /**
      * 保存日志
      * @param $match
      * @param $sport
+     * @param $duties
      */
-    protected function saveLiveLog($match, $sport) {
+    protected function saveLiveLog($match, $sport, $duties) {
         //以线路id作为参考
         //id,ch_id,match_id,sport,match_status,hname,aname,match_time,ch_name,show,platform,is_private,content,live_status,created_at,updated_at
         //leqiuba.cc
@@ -101,7 +105,7 @@ class LiveBreakCommands extends Command
         if ($show == MatchLiveChannel::kShow) {
             if (strlen($content) < 20) {
                 $log->live_status = LiveChannelLog::kLiveStatusInvalid;//
-                $this->sendWxTip("电脑端直播未填写推流地址", $match);
+                $this->sendWxTip("电脑端直播未填写推流地址", $match, $duties);
                 $flg = false;
             } else {
                 $outPath = storage_path('app/public/cover/channel/' . $ch_id . '.jpg');
@@ -113,7 +117,7 @@ class LiveBreakCommands extends Command
                     $m = @filemtime($outPath);
                     $flg = $m + 180 > time();
                     if (!$flg) {
-                        $this->sendWxTip("电脑端直播推流中断", $match);
+                        $this->sendWxTip("电脑端直播推流中断", $match, $duties);
                     } else {
                         Redis::del($key);
                     }
@@ -123,7 +127,7 @@ class LiveBreakCommands extends Command
                     $times = empty($times) ? 0 : intval($times);
                     Redis::setEx($key, 5 * 60, $times + 1);
                     if ($times >= 3) {
-                        $this->sendWxTip("电脑端直播推流中断", $match);
+                        $this->sendWxTip("电脑端直播推流中断", $match, $duties);
                     }
                 }
             }
@@ -140,15 +144,13 @@ class LiveBreakCommands extends Command
      * 发送微信提醒
      * @param $first
      * @param $match
+     * @param $duties
      */
-    protected function sendWxTip($first, $match) {
+    protected function sendWxTip($first, $match, $duties) {
         $show = $match['show'];
         if ($show != MatchLiveChannel::kShow) {
             return;//不显示的线路不提醒
         }
-        $now = date('Y-m-d H:i');
-        $query = LiveDuty::query()->where('start_date', '>=', $now);
-        $duties = $query->where('end_date', '<=', $now);
         foreach ($duties as $duty) {
             $openid = $duty->openid;
             $keyword1 = $match['hname']." VS ".$match['aname'];
