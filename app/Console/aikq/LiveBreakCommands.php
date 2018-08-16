@@ -87,26 +87,11 @@ class LiveBreakCommands extends Command
             return;
         }
 
-        $log = new LiveChannelLog();
-        $log->ch_id = $match->ch_id;
-        $log->match_id = $match->match_id;
-        $log->sport = $sport;
-        $log->match_status = $match->match_status;
-        $log->hname = $match->hname;
-        $log->aname = $match->aname;
-        $log->match_time = $match->match_time;
-        $log->ch_name = $match->ch_name;
-        $log->show = $match->show;
-        $log->platform = $match->platform;
-        $log->is_private = $match->isPrivate;
-        $log->content = $content;
-
         //判断线路是否可以播放
         if ($show == MatchLiveChannel::kShow) {
+            $flg = false;
             if (strlen($content) < 20) {
-                $log->live_status = LiveChannelLog::kLiveStatusInvalid;//
                 $this->sendWxTip("电脑端直播未填写推流地址", $match, $duties);
-                $flg = false;
             } else {
                 $outPath = storage_path('app/public/cover/channel/' . $ch_id . '.jpg');
                 self::spiderRtmpKeyFrame($content, $outPath);//取直播流的关键帧
@@ -131,12 +116,35 @@ class LiveBreakCommands extends Command
                     }
                 }
             }
-        }
-
-        try {
-            //$log->save();//连续三次断流的话，则记录日志。
-        } catch (\Exception $exception) {
-            dump($exception);
+            try {
+                $offKey = "check_off_key_" . $ch_id;
+                if (!$flg) {
+                    $times = Redis::get($offKey);
+                    $times = empty($times) ? 0 : intval($times);
+                    Redis::setEx($offKey, 5 * 60, $times + 1);
+                    if ($times >= 3) {
+                        $log = new LiveChannelLog();
+                        $log->ch_id = $match->ch_id;
+                        $log->match_id = $match->match_id;
+                        $log->sport = $sport;
+                        $log->match_status = $match->match_status;
+                        $log->hname = $match->hname;
+                        $log->aname = $match->aname;
+                        $log->match_time = $match->match_time;
+                        $log->ch_name = $match->ch_name;
+                        $log->show = $match->show;
+                        $log->platform = $match->platform;
+                        $log->is_private = $match->isPrivate;
+                        $log->content = $content;
+                        $log->live_status = LiveChannelLog::kLiveStatusInvalid;//
+                        $log->save();//连续三次断流的话，则记录日志。
+                    }
+                } else {
+                    Redis::del($offKey);
+                }
+            } catch (\Exception $exception) {
+                dump($exception);
+            }
         }
     }
 
