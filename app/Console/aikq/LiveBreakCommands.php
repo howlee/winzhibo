@@ -10,6 +10,7 @@ namespace App\Console\aikq;
 
 
 use App\Http\Controllers\Vendor\Weixin\WeixinTampleMessage;
+use App\Models\Aikq\LiveAccountSign;
 use App\Models\Aikq\BasketMatch;
 use App\Models\Aikq\LiveChannelLog;
 use App\Models\Aikq\LiveDuty;
@@ -55,17 +56,18 @@ class LiveBreakCommands extends Command
      */
     public function handle() {
         $now = date('Y-m-d H:i');
-        $query = LiveDuty::query()->where('start_date', '<=', $now);
-        $duties = $query->where('end_date', '>=', $now)->get();
+        //$query = LiveDuty::query()->where('start_date', '<=', $now);
+        //$duties = $query->where('end_date', '>=', $now)->get();
+        $openidArray = LiveAccountSign::getOnOpenidArray();
 
         $footballLives = $this->getLiveChannels(MatchLive::kSportFootball);
         foreach ($footballLives as $football) {
-            $this->saveLiveLog($football, MatchLive::kSportFootball, $duties);
+            $this->saveLiveLog($football, MatchLive::kSportFootball, $openidArray);
         }
 
         $basketLives = $this->getLiveChannels(MatchLive::kSportBasketball);
         foreach ($basketLives as $basketLive) {
-            $this->saveLiveLog($basketLive, MatchLive::kSportBasketball, $duties);
+            $this->saveLiveLog($basketLive, MatchLive::kSportBasketball, $openidArray);
         }
     }
 
@@ -73,9 +75,9 @@ class LiveBreakCommands extends Command
      * 保存日志
      * @param $match
      * @param $sport
-     * @param $duties
+     * @param $openidArray
      */
-    protected function saveLiveLog($match, $sport, $duties) {
+    protected function saveLiveLog($match, $sport, $openidArray) {
         //以线路id作为参考
         //id,ch_id,match_id,sport,match_status,hname,aname,match_time,ch_name,show,platform,is_private,content,live_status,created_at,updated_at
         //leqiuba.cc
@@ -91,7 +93,7 @@ class LiveBreakCommands extends Command
         if ($show == MatchLiveChannel::kShow) {
             $flg = false;
             if (strlen($content) < 20) {
-                $this->sendWxTip("电脑端直播未填写推流地址", $match, $duties);
+                $this->sendWxTip("电脑端直播未填写推流地址", $match, $openidArray);
             } else {
                 $outPath = storage_path('app/public/cover/channel/' . $ch_id . '.jpg');
                 self::spiderRtmpKeyFrame($content, $outPath);//取直播流的关键帧
@@ -102,7 +104,7 @@ class LiveBreakCommands extends Command
                     $m = @filemtime($outPath);
                     $flg = $m + 180 > time();
                     if (!$flg) {
-                        $this->sendWxTip("电脑端直播推流中断", $match, $duties);
+                        $this->sendWxTip("电脑端直播推流中断", $match, $openidArray);
                     } else {
                         Redis::del($key);
                     }
@@ -112,7 +114,7 @@ class LiveBreakCommands extends Command
                     $times = empty($times) ? 0 : intval($times);
                     Redis::setEx($key, 5 * 60, $times + 1);
                     if ($times >= 3) {
-                        $this->sendWxTip("电脑端直播推流中断", $match, $duties);
+                        $this->sendWxTip("电脑端直播推流中断", $match, $openidArray);
                     }
                 }
             }
@@ -152,15 +154,14 @@ class LiveBreakCommands extends Command
      * 发送微信提醒
      * @param $first
      * @param $match
-     * @param $duties
+     * @param $openidArray
      */
-    protected function sendWxTip($first, $match, $duties) {
+    protected function sendWxTip($first, $match, array $openidArray) {
         $show = $match['show'];
         if ($show != MatchLiveChannel::kShow) {
             return;//不显示的线路不提醒
         }
-        foreach ($duties as $duty) {
-            $openid = $duty->openid;
+        foreach ($openidArray as $openid) {
             $keyword1 = $match['hname']." VS ".$match['aname'];
             $keyword2 = "线路名称《" . $match['ch_name'] ."》";
             WeixinTampleMessage::liveTip($this->getWxApp(), $openid, $first, $keyword1, $keyword2);
