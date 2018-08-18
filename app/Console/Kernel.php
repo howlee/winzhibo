@@ -61,7 +61,11 @@ class Kernel extends ConsoleKernel
         $schedule->command('wap_index_cache:run')->everyMinute();//手机首页静态化
         $schedule->command('wap_video_cache:run')->everyFiveMinutes();//手机录像静态化
 
-
+        /**
+         * 修改为在linux 服务器crontab 执行定时任务，每30秒执行一次。
+         * * * * * * php /data/app/qiutantiyu/artisan check_live_break:run >>/tmp/date.txt
+         * * * * * sleep 30; php /data/app/qiutantiyu/artisan check_live_break:run >>/tmp/date.txt
+         */
         $schedule->command('check_live_break:run')->everyMinute();//检查直播流是否中断
         $schedule->command('delete_cache:run')->dailyAt('07:00');//每天7点删除无用过期文件
     }

@@ -102,18 +102,18 @@ class LiveBreakCommands extends Command
                 $key = "check_" . $ch_id;
                 try {
                     $m = @filemtime($outPath);
-                    $flg = $m + 180 > time();
+                    $flg = $m + 30 > time();
                     if (!$flg) {
                         $this->sendWxTip("电脑端直播推流中断", $match, $openidArray);
                     } else {
                         Redis::del($key);
                     }
                 } catch (\Exception $exception) {
-                    //dump($exception);三次没有文件则发送消息
+                    //dump($exception);2次没有文件则发送消息
                     $times = Redis::get($key);
                     $times = empty($times) ? 0 : intval($times);
-                    Redis::setEx($key, 5 * 60, $times + 1);
-                    if ($times >= 3) {
+                    Redis::setEx($key, 30, $times + 1);
+                    if ($times >= 2) {
                         $this->sendWxTip("电脑端直播推流中断", $match, $openidArray);
                     }
                 }
@@ -123,8 +123,8 @@ class LiveBreakCommands extends Command
                 if (!$flg) {
                     $times = Redis::get($offKey);
                     $times = empty($times) ? 0 : intval($times);
-                    Redis::setEx($offKey, 5 * 60, $times + 1);
-                    if ($times >= 3) {
+                    Redis::setEx($offKey, 1 * 60, $times + 1);
+                    if ($times >= 2) {
                         $log = new LiveChannelLog();
                         $log->ch_id = $match->ch_id;
                         $log->match_id = $match->match_id;
