@@ -125,7 +125,7 @@ class LiveBreakCommands extends Command
                 $times = Redis::get($offKey);
                 $times = empty($times) ? 0 : intval($times);
                 if (!$flg) {
-                    Redis::setEx($offKey, 59, $times + 1);
+                    Redis::setEx($offKey, 120 * 60, $times + 1);
                     LiveChannelLog::saveLog($match, $sport, $times, false, $admins);
                 } else {
                     Redis::del($offKey);
