@@ -28,6 +28,16 @@ class LiveAccountSign extends Model
         }
     }
 
+    public static function getSignAccounts() {
+        //获取当前值班人员
+        $query = self::query();
+        $query->join('accounts', 'accounts.id', '=', 'live_account_signs.account_id');
+        $query->where('live_account_signs.status', '=', self::kStatusOn);
+        $query->select('accounts.openid', 'accounts.id', 'accounts.name');
+        $ons = $query->get();//获取当前值班人员
+        return $ons;
+    }
+
     /**
      * 获取值班人员的openid数组
      * @return array

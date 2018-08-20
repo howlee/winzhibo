@@ -59,15 +59,16 @@ class LiveBreakCommands extends Command
         //$query = LiveDuty::query()->where('start_date', '<=', $now);
         //$duties = $query->where('end_date', '>=', $now)->get();
         $openidArray = LiveAccountSign::getOnOpenidArray();
+        $admins = LiveAccountSign::getSignAccounts();//当前值班人员
 
         $footballLives = $this->getLiveChannels(MatchLive::kSportFootball);
         foreach ($footballLives as $football) {
-            $this->saveLiveLog($football, MatchLive::kSportFootball, $openidArray);
+            $this->saveLiveLog($football, MatchLive::kSportFootball, $openidArray, $admins);
         }
 
         $basketLives = $this->getLiveChannels(MatchLive::kSportBasketball);
         foreach ($basketLives as $basketLive) {
-            $this->saveLiveLog($basketLive, MatchLive::kSportBasketball, $openidArray);
+            $this->saveLiveLog($basketLive, MatchLive::kSportBasketball, $openidArray, $admins);
         }
     }
 
@@ -76,8 +77,9 @@ class LiveBreakCommands extends Command
      * @param $match
      * @param $sport
      * @param $openidArray
+     * @param $admins
      */
-    protected function saveLiveLog($match, $sport, $openidArray) {
+    protected function saveLiveLog($match, $sport, $openidArray, $admins) {
         //以线路id作为参考
         //id,ch_id,match_id,sport,match_status,hname,aname,match_time,ch_name,show,platform,is_private,content,live_status,created_at,updated_at
         //leqiuba.cc
@@ -120,29 +122,16 @@ class LiveBreakCommands extends Command
             }
             try {
                 $offKey = "check_off_key_" . $ch_id;
+                $times = Redis::get($offKey);
+                $times = empty($times) ? 0 : intval($times);
                 if (!$flg) {
-                    $times = Redis::get($offKey);
-                    $times = empty($times) ? 0 : intval($times);
-                    Redis::setEx($offKey, 1 * 60, $times + 1);
-                    if ($times >= 2) {
-                        $log = new LiveChannelLog();
-                        $log->ch_id = $match->ch_id;
-                        $log->match_id = $match->match_id;
-                        $log->sport = $sport;
-                        $log->match_status = $match->match_status;
-                        $log->hname = $match->hname;
-                        $log->aname = $match->aname;
-                        $log->match_time = $match->match_time;
-                        $log->ch_name = $match->ch_name;
-                        $log->show = $match->show;
-                        $log->platform = $match->platform;
-                        $log->is_private = $match->isPrivate;
-                        $log->content = $content;
-                        $log->live_status = LiveChannelLog::kLiveStatusInvalid;//
-                        $log->save();//连续三次断流的话，则记录日志。
-                    }
+                    Redis::setEx($offKey, 59, $times + 1);
+                    LiveChannelLog::saveLog($match, $sport, $times, false, $admins);
                 } else {
                     Redis::del($offKey);
+                    if ($times > 0) {
+                        LiveChannelLog::saveLog($match, $sport, $times, true, $admins);
+                    }
                 }
             } catch (\Exception $exception) {
                 dump($exception);
@@ -189,6 +178,7 @@ class LiveBreakCommands extends Command
         $channelSelect .= "$channelTable.isPrivate, $channelTable.content, $channelTable.platform";
 
         $matchSelect = "$matchTable.id as match_id, $matchTable.hname, $matchTable.aname, $matchTable.time as match_time, $matchTable.status as match_status";
+        $matchSelect .= ",$matchTable.win_lname";
 
         $query->join($liveTable, $liveTable .'.match_id', '=', $matchTable.'.id');//有直播线路的比赛
         $query->join($channelTable, $channelTable.'.live_id', '=', $liveTable.'.id');
