@@ -114,7 +114,7 @@ class LiveBreakCommands extends Command
                     //dump($exception);2次没有文件则发送消息
                     $times = Redis::get($key);
                     $times = empty($times) ? 0 : intval($times);
-                    Redis::setEx($key, 30, $times + 1);
+                    Redis::setEx($key, 120 * 60, $times + 1);
                     if ($times >= 2) {
                         $this->sendWxTip("电脑端直播推流中断", $match, $openidArray);
                     }
