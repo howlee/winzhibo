@@ -28,7 +28,7 @@
                                 if ($sport == 3) {
                                     $info = $match['lname'] . ' ' . $match['hname'] . (empty($match['aname']) ? '' : (' VS ' . $match['aname']) );
                                 } else {
-                                    $info = $match['win_lname'] . ' ' . $match['hname'] . ' VS ' . $match['aname'];
+                                    $info = $match['league_name'] . ' ' . $match['hname'] . ' VS ' . $match['aname'];
                                 }
                             ?>
                             <li>

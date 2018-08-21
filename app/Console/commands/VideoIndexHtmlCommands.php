@@ -64,7 +64,7 @@ class VideoIndexHtmlCommands  extends Command
             $videoHtml = $liveController->videos(new Request(), $pageIndex);
             usleep(100);
             if ($pageIndex == 1) {
-                Storage::disk("public")->put("/static/live/videos.html", $videoHtml);
+                Storage::disk("public")->put("/static/live/videos/index.html", $videoHtml);
             }
             Storage::disk("public")->put("/static/live/videos/index" . $pageIndex . ".html", $videoHtml);
         }

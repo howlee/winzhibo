@@ -19,7 +19,7 @@
     @if($curPage == 1)
         <strong>1</strong>
     @else
-        <a href="/live/videos.html ">1 @if($index > 2)...@endif</a>
+        <a href="/live/videos ">1 @if($index > 2)...@endif</a>
     @endif
     @for($f_index = 0; $f_index < $showBtn; $f_index++)
         @continue($index >= $lastPage)

@@ -205,6 +205,7 @@ class LiveController extends Controller
         $videos = $this->getVideoTypeByPage('all', $page);
 
         $cache = Storage::get('/public/static/json/lives.json');
+        dump($cache);
         $json = json_decode($cache, true);
         $liveMatches = [];
         if (isset($json['matches'])) {

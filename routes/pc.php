@@ -21,7 +21,7 @@ Route::group(["namespace" => 'Live'], function () {
     Route::get('/live/football.html',"LiveController@footballLives");//足球比赛直播
     Route::get('/live/basketball.html',"LiveController@basketballLives");//篮球比赛直播
 
-    Route::get('/live/videos.html', 'LiveController@videos');
+    Route::get('/live/videos', 'LiveController@videos');
     Route::get('/live/videos/index{page}.html', 'LiveController@videos');
 
     Route::get('/live/{type}/{mid}.html',"LiveController@detail");//足球直播页
