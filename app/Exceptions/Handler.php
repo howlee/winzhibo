@@ -49,11 +49,11 @@ class Handler extends ExceptionHandler
         if ($exception instanceof HttpException) {
             $code = $exception->getStatusCode();
             //if ($code == 404) return response(view('pc.404'), 404);
-            if ($code == 404) return redirect('/404.html', 301);
+            if ($code == 404) return response(view('/pc/404'), 301);
         }
 
         if ($exception instanceof NotFoundHttpException) {
-            return redirect('/404.html', 301);
+            return response(view('/pc/404'), 301);
         }
         return parent::render($request, $exception);
     }
