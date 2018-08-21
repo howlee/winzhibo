@@ -47,8 +47,10 @@ class LiveChannelLog extends Model
             $log->platform = $match->platform;
             $log->content = $match->content;
             $log->live_status = $resume ? self::kLiveStatusValid : self::kLiveStatusInvalid;
-        } else {
-            $log = self::query()->where('ch_id', $ch_id)->first();
+        } else {//增加断流时间
+            $query = self::query()->where('ch_id', $ch_id)->where('status', self::kLiveStatusInvalid);
+            $query->orderByDesc('created_at');
+            $log = $query->first();
             $log->times = $times;
         }
         $log->signs = $sign;
