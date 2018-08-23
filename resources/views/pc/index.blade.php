@@ -49,7 +49,7 @@
                                 <a href="/live/{{$type}}/{{$match['mid']}}.html" title="{{$m_title}}" target="_blank">{{$matchInfo}}</a>
                             </div>
                             <div class="con">
-                                <a href="http://www.aikq.cc/live/spPlayer/player-{{$match['mid']}}-{{$sport}}.html" target="_blank">高清直播</a>
+                                <a href="/live/{{$type}}/{{$match['mid']}}.html" target="_blank">球探直播</a>
                             </div>
                         </li>
                     @endforeach

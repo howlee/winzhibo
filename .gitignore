@@ -7,6 +7,7 @@
 /public/sitemap
 /public/m
 /public/match
+/public/index.html
 /storage/*.key
 /storage
 /vendor

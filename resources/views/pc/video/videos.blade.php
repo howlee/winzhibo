@@ -6,7 +6,7 @@
                 <h2>综合视频录像集锦</h2>
                 <ul>
                     @foreach($videos as $video)
-                        <?php $info = date('m月d日 H:i', $video['time']) .' ' . $video['lname'] . ' ' . $video['hname'] . ' VS ' . $video['aname']; ?>
+                        <?php $info = $video['lname'] . ' ' . date('m月d日 H:i', $video['time']) . ' ' . $video['hname'] . ' VS ' . $video['aname']; ?>
                         <li>
                             <a class="v" href="/live/videos/detail/{{$video['id']}}.html" title="{{$info}}" target="_blank">{{$info}}</a>
                         </li>
