@@ -48,7 +48,7 @@ class LiveJsonWapCommands extends Command
     {
         try {
             $ch = curl_init();
-            $url = env('LIAOGOU_URL')."/aik/livesJson?isMobile=1";
+            $url = env('AKQ')."/json/m/lives.json";
             curl_setopt($ch, CURLOPT_URL,$url);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
             curl_setopt($ch, CURLOPT_TIMEOUT, 15);

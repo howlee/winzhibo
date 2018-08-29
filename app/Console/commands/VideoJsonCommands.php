@@ -58,7 +58,15 @@ class VideoJsonCommands extends Command
                     $server_output = self::execUrl($url);
                     if (!empty($server_output)) {
                         $json = json_decode($server_output, true);
-                        Storage::disk("public")->put("/static/json/subject/videos/$id/$index.json", $server_output);
+                        foreach ($json as $time=>$array) {
+                            foreach ($array as $match) {
+                                $hicon = $match['hicon'];
+                                $aicon = $match['aicon'];
+                                $match['hicon'] = empty($hicon) ? '' : str_replace('static.cdn.dlfyb.com', 'static.liaogou168.com', $hicon);
+                                $match['aicon'] = empty($aicon) ? '' : str_replace('static.cdn.dlfyb.com', 'static.liaogou168.com', $aicon);
+                            }
+                        }
+                        Storage::disk("public")->put("/static/json/subject/videos/$id/$index.json", json_encode($json));
                         if (isset($json['page']['lastPage'])) {
                             $lastPage = $json['page']['lastPage'];
                         }

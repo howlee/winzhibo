@@ -41,7 +41,7 @@
                         <p class="time" style=""><span>{{substr($match['time'], 10, 6)}}</span></p>
                     @else
                         <div class="team-left">
-                            <img src="{{!empty($match['home']['lg_icon']) ? ('http://static.liaogou168.com' . $match['home']['lg_icon']) : '//static.liaogou168.com/img/icon_team_default.png'}}" >
+                            <img src="{{!empty($match['host_icon']) ? ($match['host_icon']) : '//static.liaogou168.com/img/icon_team_default.png'}}" >
                             <p style="font-weight:bold;">  {{$match['hname']}}</p>
                         </div>
                         <div class="game-info">
@@ -49,12 +49,12 @@
                                 <bifen class="id126275">
                                     <p class="score-num gray"><span class="score score126275"> VS </span></p>
                                 </bifen>
-                                <p class="live" style="">{{$match['win_lname']}} </p>
+                                <p class="live" style="">{{$match['league_name']}} </p>
                                 <p class="time" style=""><span>{{substr($match['time'], 10, 6)}}</span></p>
                             </div>
                         </div>
                         <div class="team-right">
-                            <img src="{{!empty($match['away']['lg_icon']) ? ('http://static.liaogou168.com' . $match['away']['lg_icon']) : '//static.liaogou168.com/img/icon_team_default.png'}}" >
+                            <img src="{{!empty($match['away_icon']) ? ($match['away_icon']) : '//static.liaogou168.com/img/icon_team_default.png'}}" >
                             <p style="font-weight:bold;">{{$match['aname']}}</p>
                         </div>
                         <div class="clear"></div>
@@ -79,7 +79,7 @@
                             <p class="time" style=""><span>{{substr($match['time'], 10, 6)}}</span></p>
                         @else
                             <div class="team-left">
-                                <img src="{{!empty($match['home']['lg_icon']) ? ('http://static.liaogou168.com' . $match['home']['lg_icon']) : '//static.liaogou168.com/img/icon_team_default.png'}}" >
+                                <img src="{{!empty($match['host_icon']) ? ($match['host_icon']) : '//static.liaogou168.com/img/icon_team_default.png'}}" >
                                 <p style="font-weight:bold;">  {{$match['hname']}}</p>
                             </div>
                             <div class="game-info">
@@ -87,12 +87,12 @@
                                     <bifen class="id126275">
                                         <p class="score-num gray"><span class="score score126275"> VS </span></p>
                                     </bifen>
-                                    <p class="live" style="">{{$match['win_lname']}} </p>
+                                    <p class="live" style="">{{$match['league_name']}} </p>
                                     <p class="time" style=""><span>{{substr($match['time'], 10, 6)}}</span></p>
                                 </div>
                             </div>
                             <div class="team-right">
-                                <img src="{{!empty($match['away']['lg_icon']) ? ('http://static.liaogou168.com' . $match['away']['lg_icon']) : '//static.liaogou168.com/img/icon_team_default.png'}}" >
+                                <img src="{{!empty($match['away_icon']) ? ($match['away_icon']) : '//static.liaogou168.com/img/icon_team_default.png'}}" >
                                 <p style="font-weight:bold;">{{$match['aname']}}</p>
                             </div>
                             <div class="clear"></div>
@@ -117,7 +117,7 @@
                             <p class="time" style=""><span>{{substr($match['time'], 10, 6)}}</span></p>
                         @else
                             <div class="team-left">
-                                <img src="{{!empty($match['home']['lg_icon']) ? ('http://static.liaogou168.com' . $match['home']['lg_icon']) : '//static.liaogou168.com/img/icon_team_default.png'}}" >
+                                <img src="{{!empty($match['host_icon']) ? ($match['host_icon']) : '//static.liaogou168.com/img/icon_team_default.png'}}" >
                                 <p style="font-weight:bold;">  {{$match['hname']}}</p>
                             </div>
                             <div class="game-info">
@@ -125,12 +125,12 @@
                                     <bifen class="id126275">
                                         <p class="score-num gray"><span class="score score126275"> VS </span></p>
                                     </bifen>
-                                    <p class="live" style="">{{$match['win_lname']}} </p>
+                                    <p class="live" style="">{{$match['league_name']}} </p>
                                     <p class="time" style=""><span>{{substr($match['time'], 10, 6)}}</span></p>
                                 </div>
                             </div>
                             <div class="team-right">
-                                <img src="{{!empty($match['away']['lg_icon']) ? ('http://static.liaogou168.com' . $match['away']['lg_icon']) : '//static.liaogou168.com/img/icon_team_default.png'}}" >
+                                <img src="{{!empty($match['away_icon']) ? ($match['away_icon']) : '//static.liaogou168.com/img/icon_team_default.png'}}" >
                                 <p style="font-weight:bold;">{{$match['aname']}}</p>
                             </div>
                             <div class="clear"></div>
