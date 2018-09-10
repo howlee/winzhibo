@@ -55,12 +55,6 @@ class LiveBreakCommands extends Command
      * @return mixed
      */
     public function handle() {
-        $url = "http://183.56.168.54/hdl0901.plures.net/onlive/35ecf29630ad4c1d8440e2266f576cc6.flv?wsSecret=ebac46c1a6fa4074d85aa36c28c9f4ef&wsTime=5b9638f2&wshc_tag=0&wsts_tag=5b9638f2&wsid_tag=b7042aa7&wsiphost=ipdbm";
-        self::spiderRtmpKeyFrame($url, storage_path('app/public/cover/channel/test20180910.jpg'));
-
-        $now = date('Y-m-d H:i');
-        //$query = LiveDuty::query()->where('start_date', '<=', $now);
-        //$duties = $query->where('end_date', '>=', $now)->get();
         $openidArray = LiveAccountSign::getOnOpenidArray();
         $admins = LiveAccountSign::getSignAccounts();//当前值班人员
 
