@@ -55,6 +55,9 @@ class LiveBreakCommands extends Command
      * @return mixed
      */
     public function handle() {
+        $url = "http://183.56.168.54/hdl0901.plures.net/onlive/35ecf29630ad4c1d8440e2266f576cc6.flv?wsSecret=ebac46c1a6fa4074d85aa36c28c9f4ef&wsTime=5b9638f2&wshc_tag=0&wsts_tag=5b9638f2&wsid_tag=b7042aa7&wsiphost=ipdbm";
+        self::spiderRtmpKeyFrame($url, storage_path('app/public/cover/channel/test20180910.jpg'));
+
         $now = date('Y-m-d H:i');
         //$query = LiveDuty::query()->where('start_date', '<=', $now);
         //$duties = $query->where('end_date', '>=', $now)->get();
@@ -210,7 +213,7 @@ class LiveBreakCommands extends Command
 
 
     public static function spiderRtmpKeyFrame($stream, $outPath) {
-        $cmd = env("FFMPEG_PATH", "/usr/bin/") . "ffmpeg -i \"$stream\" -f image2 -y -vframes 1 -s 220*135 $outPath &";
+        $cmd = env("FFMPEG_PATH", "/usr/bin/") . "ffmpeg -ss 1 -i \"$stream\" -f mjpeg -y -vframes 1 -s 100*100 $outPath &";
         shell_exec($cmd);
     }
 
