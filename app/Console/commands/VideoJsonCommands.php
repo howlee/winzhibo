@@ -54,18 +54,21 @@ class VideoJsonCommands extends Command
                 $index = 1;
                 $lastPage = 1;
                 while($index <= $lastPage) {
-                    $url = $prefix . "/m/live/subject/videos/" . $id . "/$index.json";
+                    $url = $prefix . "/m/live/subject/videos/" . $id . "/$index.json?time=".time();
+                    dump($url);
                     $server_output = self::execUrl($url);
                     if (!empty($server_output)) {
                         $json = json_decode($server_output, true);
-                        foreach ($json as $time=>$array) {
-                            foreach ($array as $match) {
-                                $hicon = $match['hicon'];
-                                $aicon = $match['aicon'];
-                                $match['hicon'] = empty($hicon) ? '' : str_replace('static.cdn.dlfyb.com', 'static.liaogou168.com', $hicon);
-                                $match['aicon'] = empty($aicon) ? '' : str_replace('static.cdn.dlfyb.com', 'static.liaogou168.com', $aicon);
-                            }
-                        }
+//                        $matches = isset($json['matches']) ? $json['matches'] : [];
+//                        foreach ($matches as $time=>$array) {
+//                            foreach ($array as $match) {
+//                                $hicon = isset($match['hicon']) ? $match['hicon'] : '';
+//                                $aicon = isset($match['aicon']) ? $match['aicon'] : '';
+//
+//                                $match['hicon'] = empty($hicon) ? '' : str_replace('static.cdn.dlfyb.com', 'static.liaogou168.com', $hicon);
+//                                $match['aicon'] = empty($aicon) ? '' : str_replace('static.cdn.dlfyb.com', 'static.liaogou168.com', $aicon);
+//                            }
+//                        }
                         Storage::disk("public")->put("/static/json/subject/videos/$id/$index.json", json_encode($json));
                         if (isset($json['page']['lastPage'])) {
                             $lastPage = $json['page']['lastPage'];
@@ -82,13 +85,14 @@ class VideoJsonCommands extends Command
     /**
      * 执行url返回内容
      * @param $url
+     * @param $timeout
      * @return mixed|string
      */
-    public static function execUrl($url) {
+    public static function execUrl($url, $timeout = 5) {
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL,$url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_TIMEOUT, 20);
+        curl_setopt($ch, CURLOPT_TIMEOUT, $timeout);
         $server_output = curl_exec ($ch);
         $code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         curl_close ($ch);

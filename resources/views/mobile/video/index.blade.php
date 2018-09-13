@@ -34,11 +34,16 @@
                         } else {
                             $path = 'https://www.aikq.cc/m/live/subject/video/' . substr($mid, 0, 2) . '/' . substr($mid, 2, 4) . '/' . $mid .'.html';
                         }
+                        $hicon = !empty($match['hicon']) ? ($match['hicon']) : '//static.liaogou168.com/img/icon_team_default.png';
+                        $aicon = !empty($match['aicon']) ? $match['aicon'] : '//static.liaogou168.com/img/icon_team_default.png';
+
+                        $hicon = str_replace('static.cdn.dlfyb.com', 'static.liaogou168.com', $hicon);
+                        $aicon = str_replace('static.cdn.dlfyb.com', 'static.liaogou168.com', $aicon);
                     ?>
                     @continue(empty($path))
                     <a href="{{$path}}" class="game-item cPbtn" style="text-align: center;">
                         <div class="team-left">
-                            <img src="{{!empty($match['hicon']) ? ($match['hicon']) : '//static.liaogou168.com/img/icon_team_default.png'}}" >
+                            <img src="{{$hicon}}" >
                             <p style="font-weight:bold;">  {{$match['hname']}}</p>
                         </div>
                         <div class="game-info">
@@ -51,7 +56,7 @@
                             </div>
                         </div>
                         <div class="team-right">
-                            <img src="{{!empty($match['aicon']) ? $match['aicon'] : '//static.liaogou168.com/img/icon_team_default.png'}}" >
+                            <img src="{{$aicon}}" >
                             <p style="font-weight:bold;">{{$match['aname']}}</p>
                         </div>
                         <div class="clear"></div>

@@ -89,6 +89,9 @@ function createdVideoHtml(match) {
         aicon = '//static.liaogou168.com/img/icon_team_default.png';
     }
 
+    hicon = hicon.replace('static.cdn.dlfyb.com', 'static.liaogou168.com');
+    aicon = aicon.replace('static.cdn.dlfyb.com', 'static.liaogou168.com');
+
     var html = '<a href="' + subjectVideoLink(match.id) + '" class="game-item cPbtn" style="text-align: center;" >';
     //主队内容 开始
     html += '<div class="team-left">';
