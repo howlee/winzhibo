@@ -3,6 +3,7 @@
 namespace App\Console;
 
 use App\Console\aikq\LiveBreakCommands;
+use App\Console\Article\SpiderArticleCommand;
 use App\Console\commands\LiveDetailHtmlCommands;
 use App\Console\commands\LiveIndexHtmlCommands;
 use App\Console\commands\LiveJsonCommands;
@@ -38,6 +39,8 @@ class Kernel extends ConsoleKernel
         //爱看球直播线路检查
         LiveBreakCommands::class,
         DeleteExpireFileCommand::class,//删除无用过期文件
+
+        SpiderArticleCommand::class,//抓取直播吧足球首页
     ];
 
     /**
@@ -68,6 +71,8 @@ class Kernel extends ConsoleKernel
          */
         $schedule->command('check_live_break:run')->everyMinute();//检查直播流是否中断
         $schedule->command('delete_cache:run')->dailyAt('07:00');//每天7点删除无用过期文件
+
+        $schedule->command('spider_article:run')->hourlyAt(12);
     }
 
     /**
