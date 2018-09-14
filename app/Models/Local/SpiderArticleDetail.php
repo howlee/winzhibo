@@ -13,5 +13,5 @@ use Illuminate\Database\Eloquent\Model;
 class SpiderArticleDetail extends Model
 {
     public $connection = "qt";
-
+    public $timestamps = false;
 }

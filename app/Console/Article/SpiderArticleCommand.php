@@ -46,6 +46,10 @@ class SpiderArticleCommand extends Command
      */
     public function handle()
     {
+        $this->spiderZB8();
+    }
+
+    protected function spiderZB8() {
         $query = QueryList::getInstance();
         $document = $query->get("https://news.zhibo8.cc/zuqiu/")->encoding('UTF-8');
         $c_change = $document->find("div.v_change");

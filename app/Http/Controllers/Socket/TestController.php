@@ -20,21 +20,9 @@ class TestController extends Controller
     public function index(Request $request) {
 
         $query = QueryList::getInstance();
-        $document = $query->get("https://news.zhibo8.cc/zuqiu/")->encoding('UTF-8');
-        $c_change = $document->find("div.v_change");
-        $items = $c_change->find("div.content li a")->map(function ($item) {
-            return $item;
-        });
-//        $srcs = $as->attrs("href");
-        $today = date('Y-m-d');
-        foreach ($items as $item) {
-            $href = $item->href;
-            $title = $item->html();
-            if (preg_match("/\/$today\//", $href)) {
-                dump($title . ' ' . $href);
-                SpiderArticle::saveSpiderArticle($href, $title);
-            }
-        }
+        $document = $query->get("https://news.zhibo8.cc/zuqiu/2018-09-14/5b9b2bac87c6f.htm")->encoding('UTF-8');
+        $content = $document->find("div.content");
+
     }
 
 }

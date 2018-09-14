@@ -4,6 +4,7 @@ namespace App\Console;
 
 use App\Console\aikq\LiveBreakCommands;
 use App\Console\Article\SpiderArticleCommand;
+use App\Console\Article\SpiderArticleDetailCommand;
 use App\Console\commands\LiveDetailHtmlCommands;
 use App\Console\commands\LiveIndexHtmlCommands;
 use App\Console\commands\LiveJsonCommands;
@@ -40,7 +41,8 @@ class Kernel extends ConsoleKernel
         LiveBreakCommands::class,
         DeleteExpireFileCommand::class,//删除无用过期文件
 
-        SpiderArticleCommand::class,//抓取直播吧足球首页
+        SpiderArticleCommand::class,//抓取直播吧足球首页文章列表
+        SpiderArticleDetailCommand::class,//抓取直播吧足球文章内容
     ];
 
     /**
@@ -73,6 +75,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('delete_cache:run')->dailyAt('07:00');//每天7点删除无用过期文件
 
         $schedule->command('spider_article:run')->hourlyAt(12);
+        $schedule->command('spider_article_detail:run')->cron('*/3 * * * *');
     }
 
     /**
