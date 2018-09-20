@@ -40,7 +40,7 @@ class ArticleController extends Controller
         return $this->detailHtml($article);
     }
 
-    protected function detailHtml(PcArticle $article) {
+    public function detailHtml(PcArticle $article) {
         $result['article'] = $article;
         return view('pc.article.detail', $result);
     }

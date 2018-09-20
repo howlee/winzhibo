@@ -327,7 +327,7 @@ class ArticleController extends Controller
 
     private function generateHtml(PcArticle $article) {
         $con = new \App\Http\Controllers\PC\Article\ArticleController();
-        $con->generateHtml($article);//生成静态文件
+        $con->generateHtml($article->id);//生成静态文件
     }
 
 }
