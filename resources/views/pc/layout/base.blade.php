@@ -22,7 +22,7 @@
                 <li><a href="/" @if(isset($check) && $check == 'index') class="f" @endif >直播首页</a></li>
                 <li><a href="/live/football.html"@if(isset($check) && $check == 'football') class="f" @endif >足球直播</a></li>
                 <li><a href="/live/basketball.html"@if(isset($check) && $check == 'basketball') class="f" @endif >篮球直播</a></li>
-                {{--<li><a href="http://www.qqzhibo.net/video/zuqiu/">足球视频</a></li>--}}
+                <li><a href="/news" @if(isset($check) && $check == 'news') class="f" @endif>热点资讯</a></li>
                 {{--<li><a href="http://www.qqzhibo.net/video/lanqiu/">篮球视频</a></li>--}}
                 <li><a href="/live/videos" @if(isset($check) && $check == 'video') class="f" @endif>综合视频</a></li>
                 {{--<li id="ad_text_nav"><a href="http://www.qqzhibo.net/live/shijiebei/">世界杯直播</a></li>--}}

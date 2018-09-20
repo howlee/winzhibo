@@ -14,4 +14,5 @@ use Illuminate\Database\Eloquent\Model;
 class PcArticleDetail extends Model
 {
     public $connection = "qt";
+    public $timestamps = false;
 }

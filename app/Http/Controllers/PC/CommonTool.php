@@ -23,8 +23,24 @@ class CommonTool
         }
         $first = substr($id, 0, 2);
         $second = substr($id, 2, 3);
-        $url = 'http://www.aikq.cc/live/subject/' . $type . '/' . $first . '/' . $second . '/' . $id . '.html';
+        $url = '/live/subject/' . $type . '/' . $first . '/' . $second . '/' . $id . '.html';
         return $url;
+    }
+
+    public static function newsDetailPath($id) {
+        $id = $id . '';
+        $tmpId = $id . '';
+        while (strlen($tmpId) < 4) {
+            $tmpId = "0" . $tmpId;
+        }
+        $first = substr($tmpId, 0, 2);
+        $second = substr($tmpId, 2, 3);
+
+        return "/news/$first/$second/$id.html";
+    }
+
+    public static function newsDetailLink($id) {
+        return "/news/$id.html";
     }
 
 }

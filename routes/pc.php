@@ -40,3 +40,10 @@ Route::group(["namespace" => 'Live'], function () {
     Route::get('/live/cache/match/detail_id/{id}/{sport}', 'LiveController@staticLiveDetailById');//静态化wap/pc终端/线路
 
 });
+
+Route::group(["namespace" => 'Article'], function () {
+    Route::get("/news", "ArticleController@news");
+    Route::get("/news/{id}.html", "ArticleController@detail");
+
+    Route::get("/static/news/{id}", "ArticleController@generateHtml");
+});

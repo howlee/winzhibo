@@ -14,6 +14,18 @@ use Illuminate\Database\Eloquent\Model;
 class SpiderArticle extends Model
 {
     public $connection = "qt";
+    const kStatusValid = 1, kStatusInvalid = -1;
+
+    public function detail() {
+        return $this->hasOne(SpiderArticleDetail::class, 'id', 'id');
+    }
+
+    public function getContent() {
+        if (isset($this->detail)) {
+            return $this->detail->content;
+        }
+        return "";
+    }
 
     public static function saveSpiderArticle($url, $title) {
         if (empty($url) || empty($title)) {

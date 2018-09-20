@@ -15,4 +15,33 @@ class PcArticle extends Model
 {
     public $connection = "qt";
 
+    const kStatusPublish = 1;
+
+    public function detail() {
+        return $this->hasOne(PcArticleDetail::class, 'id', 'id');
+    }
+
+    public function getContent() {
+        if (isset($this->detail)) {
+            return $this->detail->content;
+        }
+        return "";
+    }
+
+    public function statusCN()
+    {
+        switch ($this->status) {
+            case 0: {
+                return "未发布";
+            }
+            case 1: {
+                return "已发布";
+            }
+        }
+    }
+
+    public function getUrl() {
+        return $this->url;
+    }
+
 }

@@ -204,19 +204,7 @@ class LiveController extends Controller
     public function videos(Request $request, $page = 1) {
         $videos = $this->getVideoTypeByPage('all', $page);
 
-        $cache = Storage::get('/public/static/json/lives.json');
-        $json = json_decode($cache, true);
-        $liveMatches = [];
-        if (isset($json['matches'])) {
-            $matches = $json['matches'];
-            foreach ($matches as $time=>$matchArray) {
-                foreach ($matchArray as $match) {
-                    $liveMatches[] = $match;
-                    if (count($liveMatches) >= 30) break;
-                }
-                if (count($liveMatches) >= 30) break;
-            }
-        }
+
 
         $videoArray = [];
         if (isset($videos['matches'])) {
@@ -229,7 +217,7 @@ class LiveController extends Controller
         }
         $result['page'] = $videos['page'];
         $result['videos'] = $videoArray;
-        $result['matches'] = $liveMatches;
+        $result['matches'] = self::getLiveMatches();
         $result['week_array'] = array('星期日','星期一','星期二','星期三','星期四','星期五','星期六');
         $result['check'] = 'video';
         return view('pc.video.videos', $result);
@@ -322,6 +310,23 @@ class LiveController extends Controller
             }
         }
         return $matchArray;
+    }
+
+    public static function getLiveMatches() {
+        $cache = Storage::get('/public/static/json/lives.json');
+        $json = json_decode($cache, true);
+        $liveMatches = [];
+        if (isset($json['matches'])) {
+            $matches = $json['matches'];
+            foreach ($matches as $time=>$matchArray) {
+                foreach ($matchArray as $match) {
+                    $liveMatches[] = $match;
+                    if (count($liveMatches) >= 30) break;
+                }
+                if (count($liveMatches) >= 30) break;
+            }
+        }
+        return $liveMatches;
     }
 
 }

@@ -12,7 +12,7 @@ return [
     | any other location as required by the application or its packages.
     */
 
-    'name' => env('APP_NAME', 'KanQiuMa'),
+    'name' => env('APP_NAME', 'QT_ZhiBo'),
 
     /*
     |--------------------------------------------------------------------------
@@ -51,7 +51,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://kanqiuma.cc'),
+    'url' => env('APP_URL', 'http://qiutantiyu.cc'),
 
     /*
     |--------------------------------------------------------------------------
@@ -176,6 +176,11 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+
+        /**
+         * UEditor
+         */
+        Overtrue\LaravelUEditor\UEditorServiceProvider::class,
 
     ],
 
