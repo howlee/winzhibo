@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Storage;
 
 class ArticleController extends Controller
 {
-    const PAGE_SIZE = 22;
+    const PAGE_SIZE = 23;
 
 
     public function news(Request $request, $page = 1) {

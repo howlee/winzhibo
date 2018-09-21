@@ -13,7 +13,7 @@
                     @endforeach
                 </ul>
             </div>
-            @component('pc.video.list_page_cell', ['page'=>$articles]) @endcomponent
+            @component('pc.article.list_page_cell', ['page'=>$articles]) @endcomponent
         </div>
         <div class="right r">
             @if(isset($matches))
