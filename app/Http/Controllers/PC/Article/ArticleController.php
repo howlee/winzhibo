@@ -18,12 +18,12 @@ use Illuminate\Support\Facades\Storage;
 
 class ArticleController extends Controller
 {
-    const PAGE_SIZE = 30;
+    const PAGE_SIZE = 22;
 
 
-    public function news(Request $request) {
+    public function news(Request $request, $page = 1) {
         $query = PcArticle::query()->where('status', PcArticle::kStatusPublish)->orderByDesc('publish_at');
-        $articles = $query->paginate(self::PAGE_SIZE);
+        $articles = $query->paginate(self::PAGE_SIZE, ['*'], '', $page);
 
         $result["articles"] = $articles;
         $result['matches'] = LiveController::getLiveMatches();

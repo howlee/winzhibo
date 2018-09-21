@@ -44,7 +44,7 @@
                         <span class="input-group-addon">作者</span>
                         <input type="text"
                                name="author"
-                               value="{{ session('author',isset($article) ? $article->author: '') }}"
+                               value="{{ session('author',isset($article) ? $article->author: '匿名') }}"
                                class="form-control"
                                placeholder="作者"
                                required>
@@ -53,7 +53,7 @@
                         <span class="input-group-addon">来源</span>
                         <input type="text"
                                name="resource"
-                               value="{{ session('resource', isset($article) ? $article->resource : $f_article->resource) }}"
+                               value="{{ session('resource', isset($article) ? $article->resource : (empty($f_article->resource) ? '网络' : $f_article->resource)  ) }}"
                                class="form-control"
                                placeholder="来源"
                                required>

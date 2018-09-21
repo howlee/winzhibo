@@ -1,4 +1,11 @@
 @extends('pc.layout.base')
+@section("css")
+    <style>
+        img {
+            max-width: 900px;
+        }
+    </style>
+@endsection
 @section('main')
     <div id="zc_main">
         <div class="left l" style="width: 960px;">

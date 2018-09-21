@@ -43,6 +43,7 @@ Route::group(["namespace" => 'Live'], function () {
 
 Route::group(["namespace" => 'Article'], function () {
     Route::get("/news", "ArticleController@news");
+    Route::get("/news/index{page}.html", "ArticleController@news");
     Route::get("/news/{id}.html", "ArticleController@detail");
 
     Route::get("/static/news/{id}", "ArticleController@generateHtml");

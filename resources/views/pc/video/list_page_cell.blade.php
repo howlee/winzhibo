@@ -1,9 +1,9 @@
 <?php
-    $lastPage = isset($page['lastPage']) ? $page['lastPage'] : 1;
-    $curPage = $page['curPage'];
+    $lastPage = isset($page) ? $page->lastPage() : 1;
+    $curPage = $page->currentPage();
 ?>
 @if($lastPage > 1)
-    <div class="pages"><span>共{{$page['total']}}条</span>
+    <div class="pages"><span>共{{$page->total()}}条</span>
     <?php
         $index = 0; $showBtn = 7;
         if ($lastPage - $curPage <= 3) {
@@ -14,27 +14,27 @@
         $index = $index <= 1 ? 2 : $index;
     ?>
     @if($lastPage > 7 && $curPage != 1)
-        <a href="/live/videos/index{{$curPage - 1}}.html" class="a1">上一页</a>
+        <a href="/news/index{{$curPage - 1}}.html" class="a1">上一页</a>
     @endif
     @if($curPage == 1)
         <strong>1</strong>
     @else
-        <a href="/live/videos ">1 @if($index > 2)...@endif</a>
+        <a href="/news/">1 @if($index > 2)...@endif</a>
     @endif
     @for($f_index = 0; $f_index < $showBtn; $f_index++)
         @continue($index >= $lastPage)
         @if($curPage == $index)
             <strong>{{$index}}</strong>
         @else
-            <a href="/live/videos/index{{$index}}.html" >{{$index}}</a>
+            <a href="/news/index{{$index}}.html" >{{$index}}</a>
         @endif
         <?php $index++; ?>
     @endfor
     @if($curPage == $lastPage)
         <strong>{{$lastPage}}</strong>
     @else
-        <a href='/live/videos/index{{$lastPage}}.html' >@if($index < $lastPage)...@endif{{$lastPage}}</a>
+        <a href='/news/index{{$lastPage}}.html' >@if($index < $lastPage)...@endif{{$lastPage}}</a>
     @endif
-    @if ($lastPage > 7 && $curPage != $lastPage) <a href="/live/videos/index{{$curPage + 1}}.html" class="a1">下一页</a> @endif
+    @if ($lastPage > 7 && $curPage != $lastPage) <a href="/news/index{{$curPage + 1}}.html" class="a1">下一页</a> @endif
     </div>
 @endif
