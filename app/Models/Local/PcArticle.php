@@ -44,4 +44,12 @@ class PcArticle extends Model
         return $this->url;
     }
 
+    public static function publishArticles($count = 15) {
+        $query = self::query();
+        $query->where('status', self::kStatusPublish);
+        $query->orderByDesc('publish_at');
+        $query->take($count);
+        return $query->get();
+    }
+
 }

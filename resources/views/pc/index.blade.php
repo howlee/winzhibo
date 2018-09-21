@@ -59,6 +59,17 @@
             @endforeach
         </div>
         <div class="right r">
+            @if(isset($articles))
+                <div class="box">
+                    <h2>热点资讯<a class="more" target="_blank" href="/news">+更多</a></h2>
+                    <ul id="content_zuqiu">
+                        @foreach($articles as $article)
+                            <li><a href="/news/{{$article->id}}.html" class="hei" target="_blank">{{$article->title}}</a></li>
+                        @endforeach
+                    </ul>
+                    <ul style="display:none"></ul>
+                </div>
+            @endif
             @if(isset($videos))
                 @foreach($videos as $vt=>$videoArray)
                     <div class="box">

@@ -10,6 +10,7 @@ namespace App\Http\Controllers\PC\Live;
 
 use App\Console\LiveDetailCommand;
 use App\Console\NoStartPlayerJsonCommand;
+use App\Models\Local\PcArticle;
 use App\Models\Match\MatchLiveChannel;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -66,11 +67,14 @@ class LiveController extends Controller
             }
         }
 
+        $articles = PcArticle::publishArticles();
+
         $json['week_array'] = array('星期日','星期一','星期二','星期三','星期四','星期五','星期六');
         $json['check'] = 'index';
         $json['imArray'] = $imArray;
         $json['videos'] = $this->getVideos(['nba', 'yingchao', 'xijia', 'yijia', 'dejia']);
         $json['type_cn'] = self::VIDEO_CN_ARRAY;
+        $json['articles'] = $articles;
         return view('pc.index', $json);
     }
 
