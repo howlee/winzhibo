@@ -207,7 +207,7 @@ class LiveBreakCommands extends Command
 
 
     public static function spiderRtmpKeyFrame($stream, $outPath) {
-        $cmd = env("FFMPEG_PATH", "/usr/bin/") . "ffmpeg -ss 3 -i \"$stream\" -f mjpeg -y -vframes 1 -s 100*100 $outPath &";
+        $cmd = env("FFMPEG_PATH", "/usr/bin/") . "ffmpeg -i \"$stream\" -f mjpeg -y -vframes 1 -s 100*100 $outPath &";
         shell_exec($cmd);
     }
 
