@@ -46,7 +46,7 @@ class SpiderArticleCommand extends Command
      */
     public function handle()
     {
-        //$this->spiderZB8("https://news.zhibo8.cc/zuqiu/");
+        $this->spiderZB8("https://news.zhibo8.cc/zuqiu/");
         $this->spiderZB8("https://news.zhibo8.cc/nba/");
     }
 
