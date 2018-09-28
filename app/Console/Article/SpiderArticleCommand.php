@@ -46,16 +46,18 @@ class SpiderArticleCommand extends Command
      */
     public function handle()
     {
-        $this->spiderZB8();
+        //$this->spiderZB8("https://news.zhibo8.cc/zuqiu/");
+        $this->spiderZB8("https://news.zhibo8.cc/nba/");
     }
 
-    protected function spiderZB8() {
+    protected function spiderZB8($url) {
         $query = QueryList::getInstance();
-        $document = $query->get("https://news.zhibo8.cc/zuqiu/")->encoding('UTF-8');
+        $document = $query->get($url)->encoding('UTF-8');
         $c_change = $document->find("div.v_change");
         $items = $c_change->find("div.content li a")->map(function ($item) {
             return $item;
         });
+
         $today = date('Y-m-d');
         foreach ($items as $item) {
             $href = $item->href;
