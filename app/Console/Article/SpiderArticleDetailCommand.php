@@ -12,6 +12,7 @@ namespace App\Console\Article;
 use App\Models\Local\SpiderArticle;
 use App\Models\Local\SpiderArticleDetail;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Log;
 use QL\QueryList;
 
 class SpiderArticleDetailCommand extends Command
@@ -54,24 +55,35 @@ class SpiderArticleDetailCommand extends Command
         $query = SpiderArticle::query();
         $query->leftJoin('spider_article_details', 'spider_articles.id', '=', 'spider_article_details.id');
         $query->whereNull('spider_article_details.id');
+        $query->where('spider_articles.spider_count', '<', 3);
         $query->take(15);
-        $query->selectRaw('spider_articles.id, spider_articles.from_url');
-        $query->orderBy('id');
+        $query->selectRaw('spider_articles.id, spider_articles.from_url, spider_articles.spider_count');
+        $query->orderByDesc('id');
         $articles = $query->get();
+
+
+
         foreach ($articles as $article) {
             $id = $article->id;
             $url = $article->from_url;
             if (!preg_match("/^http/", $url)) {
                 $url = 'https:' .$url;
             }
-            $query = QueryList::getInstance();
-            $document = $query->get($url)->encoding('UTF-8');
-            $content = $document->find("div.content");
+            $article->spider_count = $article->spider_count + 1;
+            $article->save();
 
-            $detail = new SpiderArticleDetail();
-            $detail->id = $id;
-            $detail->content = $content->html();
-            $detail->save();
+            try {
+                $query = QueryList::getInstance();
+                $document = $query->get($url)->encoding('UTF-8');
+                $content = $document->find("div.content");
+
+                $detail = new SpiderArticleDetail();
+                $detail->id = $id;
+                $detail->content = $content->html();
+                $detail->save();
+            } catch (\Exception $exception) {
+                Log::error($exception);
+            }
         }
     }
 
