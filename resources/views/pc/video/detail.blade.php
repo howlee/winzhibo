@@ -6,7 +6,7 @@
                 <h2>{{isset($match['time']) ? substr($match['time'], 0, 16) : ''}} {{$info}}</h2>
                 <div class="tip">如果以下信号都无效，请进入<a href="/">球探直播</a>主页查看最新直播信号 </div>
                 <div class="channel">
-                    <p>【站外录像】： <a href="{{\App\Http\Controllers\PC\CommonTool::subjectLink($match['id'], 'video')}}" target="_blank">高清录像</a></p>
+                    <p>【站外录像】： <a href="{{$link}}" target="_blank">高清录像</a></p>
                 </div>
             </div>
             <div class="box" style="width: 960px;">

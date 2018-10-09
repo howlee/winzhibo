@@ -239,6 +239,9 @@ class LiveController extends Controller
         $result['title'] = $info;
         $result['keywords'] = '';
         $result['description'] = '';
+
+        $channels = $video['channels'];
+        $result['link'] = isset($channels[0]) ? $channels[0]['link'] : '';
         return view('pc.video.detail', $result);
     }
 
