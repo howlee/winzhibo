@@ -9,7 +9,7 @@
                 <h2>{{isset($match['time']) ? substr($match['time'], 0, 11) : ''}} {{$info}}</h2>
                 <div class="tip">如果以下信号都无效，请进入<a href="/">球探直播</a>主页查看最新直播信号 </div>
                 <div class="channel">
-                    <p>【站外直播】： <a href="http://www.aikq.cc/live/spPlayer/player-{{$match['mid']}}-{{$match['sport']}}.html" target="_blank">高清直播</a></p>
+                    <p>【站外直播】： <a href="http://www.aikanqiu.com/live/spPlayer/player-{{$match['mid']}}-{{$match['sport']}}.html" target="_blank">高清直播</a></p>
                 </div>
             </div>
             <div class="box" style="width: 960px;">
