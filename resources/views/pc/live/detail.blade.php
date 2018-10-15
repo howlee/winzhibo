@@ -1,4 +1,7 @@
 @extends('pc.layout.base')
+@section("meta")
+<meta name="robots"content="nofollow">
+@endsection
 @section('main')
     <div id="zc_main">
         <div class="left l" style="width: 960px;">
