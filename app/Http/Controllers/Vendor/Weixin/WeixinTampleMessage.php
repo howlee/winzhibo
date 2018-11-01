@@ -60,7 +60,7 @@ class WeixinTampleMessage
     public static function liveTip(Application $app, $openid, $first, $keyword1, $keyword2 = '')
     {
         $templateId = "yYyxpYIO12FxkvfIfOLmfsfZH7eTrvM23XBse_IVBkU";
-        $url = 'http://mp.dlfyb.com/';
+        $url = 'https://www.aikanqiu.com/';
         //$first = '您订购的料狗工具有新的推荐信息。';
         //$keyword1 = "VIP工具 - " . $toolOrder->tool->name;
         //$keyword2 = $content;
