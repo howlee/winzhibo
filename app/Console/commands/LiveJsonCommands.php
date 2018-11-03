@@ -48,10 +48,16 @@ class LiveJsonCommands extends Command
     {
         try {
             $ch = curl_init();
-            $url = env('AKQ')."/json/lives.json";
+            $url = env('API_URL')."/json/pc/lives.json";
+            $isHttps = preg_match('^https', $url);
+
             curl_setopt($ch, CURLOPT_URL,$url);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
             curl_setopt($ch, CURLOPT_TIMEOUT, 20);
+            if ($isHttps) {
+                curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);    // https请求 不验证证书和hosts
+                curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, FALSE);
+            }
             $server_output = curl_exec ($ch);
             $code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
             curl_close ($ch);

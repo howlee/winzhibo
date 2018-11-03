@@ -83,16 +83,16 @@ class LiveBreakCommands extends Command
         $ch_id = $match->ch_id;
         $content = $match->content;
         $show = $match->show;
-        if (strstr($content,"leqiuba.cc")) {
-            dump("乐球吧的外链 不记录");
-            return;
-        }
+        $player = $match->player;
 
         //判断线路是否可以播放
         if ($show == MatchLiveChannel::kShow) {
             $flg = false;
             if (strlen($content) < 20) {
                 $this->sendWxTip("电脑端直播未填写推流地址", $match, $openidArray);
+            } else if ($player == 11) {
+                dump("$match->hname VS $match->aname iframe线路不发送提醒");
+                return;
             } else {
                 $outPath = storage_path('app/public/cover/channel/' . $ch_id . '.jpg');
                 self::spiderRtmpKeyFrame($content, $outPath);//取直播流的关键帧
@@ -173,7 +173,7 @@ class LiveBreakCommands extends Command
         }
 
         $channelSelect = "$channelTable.id as ch_id, $channelTable.name as ch_name, $channelTable.show,";
-        $channelSelect .= "$channelTable.isPrivate, $channelTable.content, $channelTable.platform";
+        $channelSelect .= "$channelTable.isPrivate, $channelTable.content, $channelTable.platform, $channelTable.player";
 
         $matchSelect = "$matchTable.id as match_id, $matchTable.hname, $matchTable.aname, $matchTable.time as match_time, $matchTable.status as match_status";
         $matchSelect .= ",$matchTable.win_lname";

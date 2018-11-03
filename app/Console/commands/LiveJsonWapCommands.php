@@ -48,7 +48,13 @@ class LiveJsonWapCommands extends Command
     {
         try {
             $ch = curl_init();
-            $url = env('AKQ')."/m/json/lives.json";
+            $url = env('API_URL')."/json/m/lives.json";
+            $isHttps = preg_match('^https', $url);
+
+            if ($isHttps) {
+                curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);    // https请求 不验证证书和hosts
+                curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, FALSE);
+            }
             curl_setopt($ch, CURLOPT_URL,$url);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
             curl_setopt($ch, CURLOPT_TIMEOUT, 15);

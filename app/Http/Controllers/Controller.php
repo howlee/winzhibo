@@ -50,4 +50,20 @@ class Controller extends BaseController
         return false;
     }
 
+    public static function execUrl($url, $timeout = 5) {
+        $isHttps = preg_match('^https', $url);
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL,$url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_TIMEOUT, $timeout);//8秒超时
+        if ($isHttps) {
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);    // https请求 不验证证书和hosts
+            curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, FALSE);
+        }
+        $server_out = curl_exec ($ch);
+        curl_close ($ch);
+        return $server_out;
+    }
+
 }
