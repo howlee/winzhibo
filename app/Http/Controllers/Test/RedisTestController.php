@@ -25,7 +25,7 @@ class RedisTestController extends Controller
         }
         $array = [];
         for ($index = 0; $index < $num; $index++) {
-            $array[] = 1;
+            $array[] = $index;
         }
         Redis::lpush(self::REDIS_KEY, $array);
     }
