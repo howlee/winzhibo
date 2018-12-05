@@ -19,4 +19,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::group([], function () {
     Route::get('/test', 'Socket\TestController@index');
+
+    Route::get('/redis/pop', 'Test\RedisTestController@redisRpop');
+    Route::get('/redis/push', 'Test\RedisTestController@redisLPush');
 });
