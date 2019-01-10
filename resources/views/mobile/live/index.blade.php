@@ -35,7 +35,7 @@
                         $sport = $match['sport'];
                         $pName = $sport == 1 ? 'football' : ($sport == 2 ? 'basketball' : 'other');
                     ?>
-                    <a href="https://www.aikq.cc/m/live/{{$pName}}/{{$match['mid']}}.html" class="game-item cPbtn" style="text-align: center;">
+                    <a href="{{env("PLAYER_URL")}}/live/spPlayer/player-{{$match['mid']}}-{{$match['sport']}}.html" class="game-item cPbtn" style="text-align: center;">
                     @if($sport == 3)
                         <p style="font-weight:bold;">  {{$match['hname'] . (empty($match['aname']) ? '' : (' VS ' . $match['aname']) ) }}</p>
                         <p class="time" style=""><span>{{substr($match['time'], 10, 6)}}</span></p>

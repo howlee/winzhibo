@@ -49,7 +49,7 @@ class LiveJsonCommands extends Command
         try {
             $ch = curl_init();
             $url = env('API_URL')."/json/pc/lives.json";
-            $isHttps = preg_match('^https', $url);
+            $isHttps = preg_match('/^https/', $url);
 
             curl_setopt($ch, CURLOPT_URL,$url);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);

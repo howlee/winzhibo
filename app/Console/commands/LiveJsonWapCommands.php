@@ -49,7 +49,7 @@ class LiveJsonWapCommands extends Command
         try {
             $ch = curl_init();
             $url = env('API_URL')."/json/m/lives.json";
-            $isHttps = preg_match('^https', $url);
+            $isHttps = preg_match('/^https/', $url);
 
             if ($isHttps) {
                 curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);    // https请求 不验证证书和hosts
