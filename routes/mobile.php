@@ -10,15 +10,11 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::group(["namespace" => 'Live'], function () {
-
-});
-
 /**
  * 直播入口
  */
 Route::group(["namespace" => 'Live'], function () {
     Route::get("/index.html", "LiveController@index");//直播列表
+    Route::get("/detail/{sport}_{mid}.html", "LiveController@detail");//直播终端
     Route::get("/videos.html", "LiveController@videos");
 });

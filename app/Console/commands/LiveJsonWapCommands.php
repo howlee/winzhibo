@@ -54,6 +54,7 @@ class LiveJsonWapCommands extends Command
             if (!empty($server_output)) {
                 Storage::disk("public")->put("/static/json/wap/lives.json", $server_output);
                 CommonTool::saveChannelsFromMatches($server_output, true);
+                CommonTool::saveMobileDetailHtml($server_output);//保存m站终端html页面
             }
         } catch (\Exception $exception) {
             Log::error($exception);

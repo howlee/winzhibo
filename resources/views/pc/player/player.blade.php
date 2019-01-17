@@ -61,9 +61,9 @@
         var cid;
         if (!obj) {
             if (isPhone()) {
-                obj = $("#MyPlayer ul li.on")[0];
+                obj = $("#MyPlayer ul.m li.on")[0];
             } else {
-                obj = $("#MyPlayer ul li.on")[0];
+                obj = $("#MyPlayer ul.pc li.on")[0];
             }
         }
         cid = obj.getAttribute("channelId");
@@ -86,8 +86,10 @@
                         if (cp == 11) {
                             player = null;
                             $("div.player").html('<iframe src="'+link+'" width="100%" height="100%" scrolling="no"></iframe>');
+                            break;
                         } else {
                             goPlay(link);
+                            break;
                         }
                     }
                 }

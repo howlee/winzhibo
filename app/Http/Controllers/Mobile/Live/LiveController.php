@@ -8,6 +8,7 @@
 
 namespace App\Http\Controllers\Mobile\Live;
 
+use App\Http\Controllers\PC\CommonTool;
 use App\Models\Match\Odd;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -77,6 +78,21 @@ class LiveController extends Controller
     /////////////////////////////////////  wap列表 结束   /////////////////////////////////////
 
     /////////////////////////////////////  wap终端 开始   /////////////////////////////////////
+    public function detail(Request $request, $sport, $mid) {
+        $match = CommonTool::getMatch($sport, $mid);
+        if (!isset($match)) {
+            return "";
+        }
+        $hicon = !empty($match['host_icon']) ? $match['host_icon'] : '//static.liaogou168.com/img/icon_team_default.png';
+        $aicon = !empty($match['away_icon']) ? $match['away_icon'] : '//static.liaogou168.com/img/icon_team_default.png';
+
+        $hicon = str_replace('static.cdn.dlfyb.com', 'static.liaogou168.com', $hicon);
+        $aicon = str_replace('static.cdn.dlfyb.com', 'static.liaogou168.com', $aicon);
+
+        $result = ["match"=>$match, "hicon"=>$hicon, "aicon"=>$aicon];
+        return view('mobile.live.detail', $result);
+    }
+
     /**
      * 直播终端
      * @param Request $request
@@ -84,7 +100,7 @@ class LiveController extends Controller
      * @param bool $immediate 是否即时获取数据
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function footballdetail(Request $request, $id, $immediate = false) {
+    public function footballDetail(Request $request, $id, $immediate = false) {
 
         return view('mobile.live.detail');
     }

@@ -140,6 +140,34 @@ class CommonTool
         }
     }
 
+    public static function saveMobileDetailHtml($out) {
+        $array = json_decode($out, true);
+        if (is_null($array) || !isset($array["matches"])) {
+            return;
+        }
+        $matches = $array["matches"];
+        $con = new \App\Http\Controllers\Mobile\Live\LiveController();
+        $request = new Request();
+        foreach ($matches as $time=>$matchArray) {
+            foreach ($matchArray as $key => $match) {
+                $sport = $match["sport"];
+                $mid = $match["mid"];
+                $playerHtml = $con->detail($request, $sport, $mid);
+                if (empty($playerHtml)) continue;
+
+                $tmpId = $mid . '';
+                while (strlen($tmpId) < 4) {
+                    $tmpId = "0" . $tmpId;
+                }
+                $first = substr($tmpId, 0, 2);
+                $second = substr($tmpId, 2, 2);
+
+                $path = "/static/m/detail/".$sport."/".$first."/".$second."/".$mid.".html";
+                Storage::disk("public")->put($path, $playerHtml);
+            }
+        }
+    }
+
     /**
      *
      * @param $sport
