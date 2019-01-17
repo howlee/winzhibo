@@ -1,0 +1,104 @@
+﻿
+*{max-height:999999px; margin:0; padding:0; border:0; outline:0; font-style:inherit; font-size:100%; font-family:inherit; box-shadow:none; -webkit-tap-highlight-color:rgba(0, 0, 0, 0); -ms-touch-action:manipulation; touch-action:manipulation;}
+a{text-decoration:none; -webkit-tap-highlight-color: rgba(255,255,255,0);}
+a,a:link,a:visited,a:hover,a:active{ color: inherit; cursor: pointer;}
+
+html{height: 100%;}
+body{
+	height: 100%;
+	background: #000;
+	position: relative;
+}
+
+#MyPlayer{
+	position: fixed; top: 0; bottom: 0; left: 0; right: 0;
+}
+#MyPlayer .player{
+	height: 100%; width: 100%;
+	position: relative;
+}
+#MyPlayer img{
+	max-width: 100%;
+}
+
+
+#MyPlayer.hasList{
+	padding-top: 40px;
+}
+#MyPlayer ul.list{
+	height: 30px;
+	padding-left: 5%;
+	background: url(/img/pc/nav_bg.gif) 0 -30px;
+	font-size: 0; line-height: 0; text-align: left; white-space:nowrap;
+	position: absolute; top: 0; left: 0; right: 0; z-index: 10;
+	overflow-x: auto; overflow-y: hidden;
+	display: none;
+}
+#MyPlayer ul.list span{
+	padding-right: 4px;
+	font-size: 14px; line-height: 30px; color: #fff;
+}
+#MyPlayer.hasList ul.list{
+	display: block;
+}
+
+#MyPlayer ul.list .li{
+	height: 30px; min-width: 70px;
+	padding: 0 4px; margin: 0 10px;
+	font-size: 14px; line-height: 30px; text-align: center; color: #fff;
+	position: relative;
+	display: inline-block;
+	cursor: pointer;
+}
+#MyPlayer ul.list .li:last-child{
+	margin-right: 0;
+}
+#MyPlayer ul.list .li.on, #MyPlayer ul.list li.li:hover{
+	color: #FF0;
+}
+
+
+#MyPlayer .player .noLive{
+	margin-top: -140px;
+	position: absolute; top: 50%; left: 0; right: 0;
+}
+#MyPlayer a + .player .noLive{
+	margin-top: -200px;
+}
+#MyPlayer .player .noLive p{
+	font-size: 1em; line-height: 2em; text-align: center; color: #fff;
+}
+#MyPlayer .player .noLive p b{
+	font-size: 1.5em; color: #FF0;
+}
+#MyPlayer .player .noLive img{
+	max-width: 200px; width: 30%;
+	margin: 20px auto;
+	display: block;
+}
+
+@media only screen and (max-device-width: 480px) {
+	#MyPlayer ul.list{
+		padding-left: 0;
+	}
+	#MyPlayer ul.list span{
+		display: none;
+	}
+	#MyPlayer ul.list span + .li{
+		margin-left: 0;
+	}
+	#MyPlayer ul.list{
+		height: 32px;
+		display: -webkit-box !important; display: -moz-box !important; display: -ms-flexbox !important; display: -webkit-flex !important; display: flex !important;
+	}
+	#MyPlayer ul.list .li{
+		-webkit-box-flex: 1; -moz-box-flex: 1; -webkit-flex: 1; -ms-flex: 1; flex: 1;
+	}
+	#MyPlayer ul.list .li:after{
+		display: none;
+	}
+}
+
+
+
+

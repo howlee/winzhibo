@@ -10,6 +10,7 @@ namespace App\Http\Controllers\PC\Live;
 
 use App\Console\LiveDetailCommand;
 use App\Console\NoStartPlayerJsonCommand;
+use App\Http\Controllers\PC\CommonTool;
 use App\Models\Local\PcArticle;
 use App\Models\Match\MatchLiveChannel;
 use Illuminate\Http\Request;
@@ -144,28 +145,6 @@ class LiveController extends Controller
             return abort(404);
         }
         return $this->detailMatchHtml($sport, $match);
-//        if ($sport == 3) {
-//            $league = $match['league_name'];
-//            if (empty($league)) {
-//                $league = $match['project'];
-//            }
-//        } else {
-//            $league = $match['league_name'];
-//            if (empty($league)) {
-//                $league = $match['win_lname'];
-//            }
-//        }
-//        $info = $league . ' ' . $match['hname'] . (empty($match['aname']) ? '' : (' VS ' . $match['aname']) ) ;
-//
-//        $result['match'] = $match;
-//        $result['info'] = $info;
-//        $result['league'] = $league;
-//
-//        $result['title'] = $info;
-//        $result['keywords'] = '';
-//        $result['description'] = '';
-//
-//        return view('pc.live.detail', $result);
     }
 
 
@@ -243,6 +222,38 @@ class LiveController extends Controller
         $channels = $video['channels'];
         $result['link'] = isset($channels[0]) ? $channels[0]['link'] : '';
         return view('pc.video.detail', $result);
+    }
+
+
+    /**
+     * 播放终端
+     * @param Request $request
+     * @param $sport
+     * @param $mid
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function player(Request $request, $sport, $mid) {
+        //TODO
+        //1.获取比赛信息
+        $match = CommonTool::getMatch($sport, $mid);
+        if (!isset($match)) {
+            return "";
+        }
+        //2.获取线路信息 pc、m
+        $pcChannels = CommonTool::getChannels($sport, $mid, false);
+        $mChannels = CommonTool::getChannels($sport, $mid, true);
+        $adName = $match["league_name"];
+        if (mb_strlen($adName) > 3) {
+            $adName = "体育";
+        }
+        $adName .= "投注";
+        $time = strtotime($match["time"]);
+        $result = ["match"=>$match, "pcChannels"=>$pcChannels, "mChannels"=>$mChannels, "adName"=>$adName];
+        $result["time"] = $time;
+        $result["live"] = $match["status"] > 0 || ($time - time() < 30 * 60);
+        $result["sport"] = $match["sport"];
+        $result["mid"] = $match["mid"];
+        return view("pc.player.player", $result);
     }
 
     //=========================================================  获取数据 =========================================================//

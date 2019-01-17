@@ -20,6 +20,7 @@ Route::group(["namespace" => 'Live'], function () {
     Route::get('/index.html',"LiveController@lives");//首页
     Route::get('/live/football.html',"LiveController@footballLives");//足球比赛直播
     Route::get('/live/basketball.html',"LiveController@basketballLives");//篮球比赛直播
+    Route::get('/live/player/{sport}_{mid}.html', 'LiveController@player');//播放器终端
 
     Route::get('/live/videos', 'LiveController@videos');
     Route::get('/live/videos/index{page}.html', 'LiveController@videos');

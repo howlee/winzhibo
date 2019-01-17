@@ -8,8 +8,9 @@
             <div class="live" style="width: 940px;">
                 <h2>{{isset($match['time']) ? substr($match['time'], 0, 11) : ''}} {{$info}}</h2>
                 <div class="tip">如果以下信号都无效，请进入<a href="/">球探直播</a>主页查看最新直播信号 </div>
-                <h3>{{isset($match['time']) ? substr($match['time'], 0, 16) : ''}} {{$info}}</h3>
-                <div class="info">
+                {{--<h3>{{isset($match['time']) ? substr($match['time'], 0, 16) : ''}} {{$info}}</h3>--}}
+                <div class="info" style="height: 500px;">
+                    {{--<iframe style="border: none;" src="/live/player/{{$match["sport"]}}_{{$match["mid"]}}.html" width="100%" height="100%" scrolling="no"></iframe>--}}
                     @if($match['sport'] != 3)
                         <p>对阵双方：主队：{{$match['hname']}}　客队：{{$match['aname']}}</p>
                     @endif

@@ -9,6 +9,8 @@
 namespace App\Console\commands;
 
 
+use App\Http\Controllers\Controller;
+use App\Http\Controllers\PC\CommonTool;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
@@ -47,29 +49,12 @@ class LiveJsonWapCommands extends Command
     public function handle()
     {
         try {
-            $ch = curl_init();
             $url = env('API_URL')."/json/m/lives.json";
-            $isHttps = preg_match('/^https/', $url);
-
-            if ($isHttps) {
-                curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);    // https请求 不验证证书和hosts
-                curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, FALSE);
+            $server_output = Controller::execUrl($url, 3);
+            if (!empty($server_output)) {
+                Storage::disk("public")->put("/static/json/wap/lives.json", $server_output);
+                CommonTool::saveChannelsFromMatches($server_output, true);
             }
-            curl_setopt($ch, CURLOPT_URL,$url);
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($ch, CURLOPT_TIMEOUT, 15);
-            $server_output = curl_exec ($ch);
-            $http_code = curl_getinfo($ch,CURLINFO_HTTP_CODE);
-            curl_close ($ch);
-            if ($http_code >= 400) {
-                dump("获取数据失败");
-                return;
-            }
-            if (empty($server_output)) {
-                dump("获取数据失败");
-                return;
-            }
-            Storage::disk("public")->put("/static/json/wap/lives.json", $server_output);
         } catch (\Exception $exception) {
             Log::error($exception);
         }

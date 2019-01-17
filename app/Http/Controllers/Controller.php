@@ -51,7 +51,7 @@ class Controller extends BaseController
     }
 
     public static function execUrl($url, $timeout = 5) {
-        $isHttps = preg_match('^https', $url);
+        $isHttps = preg_match('/^https/', $url);
 
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL,$url);
