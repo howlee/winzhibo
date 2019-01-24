@@ -74,8 +74,8 @@ class Kernel extends ConsoleKernel
         $schedule->command('check_live_break:run')->everyMinute();//检查直播流是否中断
         $schedule->command('delete_cache:run')->dailyAt('07:00');//每天7点删除无用过期文件
 
-        $schedule->command('spider_article:run')->everyTenMinutes();
-        $schedule->command('spider_article_detail:run')->cron('*/3 * * * *');
+        //$schedule->command('spider_article:run')->everyTenMinutes();
+        //$schedule->command('spider_article_detail:run')->cron('*/3 * * * *');
     }
 
     /**
