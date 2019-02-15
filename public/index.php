@@ -1,4 +1,9 @@
 <?php
+$xhprof_on = true;
+
+if ($xhprof_on) {
+    xhprof_enable();
+}
 
 /**
  * Laravel - A PHP Framework For Web Artisans
@@ -56,3 +61,13 @@ $response = $kernel->handle(
 $response->send();
 
 $kernel->terminate($request, $response);
+
+if($xhprof_on){
+    $xhprof_data = xhprof_disable();
+    $xhprof_root = '/data/program/xhprof/';//xhprof的虚拟主机目录
+    include_once $xhprof_root."xhprof_lib/utils/xhprof_lib.php";
+    include_once $xhprof_root."xhprof_lib/utils/xhprof_runs.php";
+    $xhprof_runs = new XHProfRuns_Default();
+    $run_id = $xhprof_runs->save_run($xhprof_data, "xhprof");
+    //echo '<a href="http://www.qiutantiyu.com/xhprof/index.php?run='.$run_id.'&source=hx" target="_blank">统计</a>';
+}
