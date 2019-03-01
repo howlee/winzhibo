@@ -31,11 +31,12 @@
             @foreach($matches as $time=>$array)
                 <h2 class="today">{{$time}}</h2>
                 @foreach($array as $match)
+                    @continue($match["status"] < 0)
                     <?php
                         $sport = $match['sport'];
                         $pName = $sport == 1 ? 'football' : ($sport == 2 ? 'basketball' : 'other');
                     ?>
-                    <a href="{{env("PLAYER_URL")}}/live/spPlayer/player-{{$match['mid']}}-{{$match['sport']}}.html" class="game-item cPbtn" style="text-align: center;">
+                    <a href="{{env("PLAYER_URL")}}/room/{{$match['sport'] . "" . $match['mid']}}.html" class="game-item cPbtn" style="text-align: center;">
                     @if($sport == 3)
                         <p style="font-weight:bold;">  {{$match['hname'] . (empty($match['aname']) ? '' : (' VS ' . $match['aname']) ) }}</p>
                         <p class="time" style=""><span>{{substr($match['time'], 10, 6)}}</span></p>

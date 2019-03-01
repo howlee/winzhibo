@@ -24,6 +24,7 @@
                 </h2>
                 <ul>
                     @foreach($matchArray as $match)
+                        @continue($match["status"] < 0)
                         <?php
                         $hourCn = date('H:i', strtotime($match['time']));
                         $league = $match['league_name'];

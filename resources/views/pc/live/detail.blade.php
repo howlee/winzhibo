@@ -20,7 +20,7 @@
             </div>
             <div class="box" style="width: 960px;">
                 <div class="channel">
-                    <p>【站外直播】： <a href="{{env("PLAYER_URL")}}/live/spPlayer/player-{{$match['mid']}}-{{$match['sport']}}.html" target="_blank">高清直播</a></p>
+                    <p>【站外直播】： <a href="{{env("PLAYER_URL")}}/room/{{$match['sport']}}{{$match['mid']}}.html" target="_blank">高清直播</a></p>
                 </div>
             </div>
             <!--相关比赛-->
