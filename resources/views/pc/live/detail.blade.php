@@ -18,10 +18,8 @@
                     <p>比赛时长：2小时</p>
                 </div>
             </div>
-            <div class="box" style="width: 960px;">
-                <div class="channel">
-                    <p>【站外直播】： <a href="{{env("PLAYER_URL")}}/room/{{$match['sport']}}{{$match['mid']}}.html" target="_blank">高清直播</a></p>
-                </div>
+            <div class="box" style="width: 960px;height: 500px;">
+                <iframe style="border: none;" src="{{env("PLAYER_URL")}}/player/{{$match["sport"] . $match["mid"]}}.html" width="100%" height="100%" scrolling="no"></iframe>
             </div>
             <!--相关比赛-->
             <!--介绍内容-->
