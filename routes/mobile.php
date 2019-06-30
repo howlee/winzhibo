@@ -16,5 +16,6 @@
 Route::group(["namespace" => 'Live'], function () {
     Route::get("/index.html", "LiveController@index");//直播列表
     Route::get("/detail/{sport}_{mid}.html", "LiveController@detail");//直播终端
+    Route::get("/live/{sportEn}/{mid}.html", "LiveController@detailBy");
     Route::get("/videos.html", "LiveController@videos");
 });

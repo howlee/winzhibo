@@ -81,9 +81,18 @@ class LiveController extends Controller
     public function detail(Request $request, $sport, $mid) {
         $match = CommonTool::getMatch($sport, $mid);
         if (!isset($match)) {
-            return "";
+            return abort(404);
         }
         return $this->detailHtml($match);
+    }
+
+    public function detailBy(Request $request, $sportEn, $mid) {
+        $array = ["football"=>1, "basketball"=>2, "other"=>3];
+        if (!isset($array[$sportEn])) {
+            return abort(404);
+        }
+        $sport = $array[$sportEn];
+        return $this->detail($request, $sport, $mid);
     }
 
     public function detailHtml($match) {
