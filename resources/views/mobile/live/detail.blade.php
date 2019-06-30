@@ -18,12 +18,12 @@
 </head>
 <body>
 <div class="container">
-    <div class="wrap">
+    <div class="wrap" style="background-color: #ffffff;">
         <div class="header">
             <a href="/m/index.html"><img src="/img/mobile/wap_logo.png"/></a>
         </div>
         <div class="game-list" style="display:block;">
-            <a href="https://lehubo.com/live/spPlayer/player-196587-2.html" class="game-item cPbtn" style="text-align: center;">
+            <div class="game-item cPbtn" style="text-align: center;">
                 <div class="team-left">
                     <img src="{{$hicon}}">
                     <p style="font-weight:bold;">{{$match["hname"]}}</p>
@@ -42,9 +42,9 @@
                     <p style="font-weight:bold;">{{$match["aname"]}}</p>
                 </div>
                 <div class="clear"></div>
-            </a>
-            <div style="height: 650px;">
-                <iframe style="border: 0;" src="/live/player/{{$match["sport"]}}{{$match["mid"]}}.html" width="100%" height="100%" scrolling="no"></iframe>
+            </div>
+            <div style="height: 350px">
+                <iframe style="border: 0;" src="{{env("PLAYER_URL")}}/player/{{$match["sport"].$match["mid"]}}.html" width="100%" height="100%" scrolling="no"></iframe>
             </div>
         </div>
         <div class="footer-bar">

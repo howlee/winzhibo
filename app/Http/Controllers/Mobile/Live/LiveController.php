@@ -83,6 +83,10 @@ class LiveController extends Controller
         if (!isset($match)) {
             return "";
         }
+        return $this->detailHtml($match);
+    }
+
+    public function detailHtml($match) {
         $hicon = !empty($match['host_icon']) ? $match['host_icon'] : '//static.liaogou168.com/img/icon_team_default.png';
         $aicon = !empty($match['away_icon']) ? $match['away_icon'] : '//static.liaogou168.com/img/icon_team_default.png';
 

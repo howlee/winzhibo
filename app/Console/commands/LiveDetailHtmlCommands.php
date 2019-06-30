@@ -56,6 +56,7 @@ class LiveDetailHtmlCommands extends Command
         $matchArray = $json['matches'];
 
         $liveController = new LiveController();
+        $mController = new \App\Http\Controllers\Mobile\Live\LiveController();
         foreach ($matchArray as $time=>$matches) {
             foreach ($matches as $key=>$match) {
                 $sport = $match['sport'];
@@ -68,9 +69,14 @@ class LiveDetailHtmlCommands extends Command
                     $type = 'other';
                 }
                 $html = $liveController->detailMatchHtml($sport, $match);
-                if (empty($html)) continue;
-                Storage::disk("public")->put("/static/live/" . $type . "/" . $mid . ".html", $html);
+                if (!empty($html)) {
+                    Storage::disk("public")->put("/static/live/" . $type . "/" . $mid . ".html", $html);
+                }
                 //'football'=>1, 'basketball'=>2, 'other'=>3
+                $mHtml = $mController->detailHtml($match);
+                if (!empty($mHtml)) {
+                    Storage::disk("public")->put("/static/m/live/" . $type . "/" . $mid . ".html", $html);
+                }
             }
         }
 
