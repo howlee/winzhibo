@@ -9,7 +9,9 @@
 namespace App\Http\Controllers\PC;
 
 use App\Http\Controllers\PC\Live\LiveController;
+use App\Models\Local\Match;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Storage;
 
 class CommonTool
@@ -175,6 +177,25 @@ class CommonTool
      * @return mixed
      */
     public static function getMatch($sport, $mid) {
+        $key = "Match_" . $sport . "_" . $mid;
+        $cache = Redis::get($key);
+        $match = null;
+        if (!empty($cache)) {
+            $match = json_decode($cache, true);
+        }
+        if (!isset($match)) {
+            $match = Match::findBy($sport, $mid);
+        }
+        return $match;
+    }
+
+    /**
+     *
+     * @param $sport
+     * @param $mid
+     * @return mixed
+     */
+    public static function getMatchBak($sport, $mid) {
         $tmpId = $mid . '';
         while (strlen($tmpId) < 4) {
             $tmpId = "0" . $tmpId;

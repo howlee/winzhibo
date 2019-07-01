@@ -75,7 +75,7 @@ class LiveDetailHtmlCommands extends Command
                 //'football'=>1, 'basketball'=>2, 'other'=>3
                 $mHtml = $mController->detailHtml($match);
                 if (!empty($mHtml)) {
-                    Storage::disk("public")->put("/static/m/live/" . $type . "/" . $mid . ".html", $html);
+                    Storage::disk("public")->put("/static/m/live/" . $type . "/" . $mid . ".html", $mHtml);
                 }
             }
         }

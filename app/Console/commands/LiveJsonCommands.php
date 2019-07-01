@@ -11,8 +11,10 @@ namespace App\Console\commands;
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\PC\CommonTool;
+use App\Models\Local\Match;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Storage;
 
 class LiveJsonCommands extends Command
@@ -53,11 +55,30 @@ class LiveJsonCommands extends Command
             $server_output = Controller::execUrl($url, 3);
             if (!empty($server_output)) {
                 Storage::disk("public")->put("/static/json/lives.json", $server_output);
-                CommonTool::saveChannelsFromMatches($server_output, false);//保存 channels.json
-                CommonTool::saveMatchJson($server_output);//保存 比赛信息 PC
-                CommonTool::savePlayerHtml($server_output);//保存player播放终端HTML
+                $data = json_decode($server_output, true);
+                if (!isset($data["matches"])) {
+                    return;
+                }
+                $matches = $data["matches"];
+                foreach ($matches as $date=>$matchArray) {
+                    foreach ($matchArray as $key=>$match) {
+                        $status = $match["status"];
+                        $time = strtotime($match["time"]);
+                        if ($status == -1) {
+                            $cache = Redis::get($key);
+                            if (empty($cache)) {
+                                Match::saveMatch($match);
+                                Redis::setEx($key, 60 * 60 * 4, 1);
+                            }
+                        } else {
+                            $newKey = "Match_" . $key;
+                            Redis::setEx($newKey, $time - time() + (60 * 60 * 4), json_encode($match));
+                        }
+                    }
+                }
             }
         } catch (\Exception $exception) {
+            echo $exception->getMessage();
             Log::error($exception);
         }
     }

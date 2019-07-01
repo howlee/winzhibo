@@ -9,8 +9,8 @@
                 </h2>
                 <div class="rec_match">
                     @foreach($imArray as $match)
-                        <?php $sport = $match['sport']; $type = $sport == 1 ? 'football' : ($sport == 2 ? 'basketball' : 'other'); ?>
-                        <a href="/live/{{$type}}/{{$match['mid']}}.html" title="{{date('m月d日 H:i', strtotime($match['time']))}} {{$match['league_name']}} {{$match['hname']}}VS{{$match['aname']}}" target="_blank">{{$match['hname']}} VS {{$match['aname']}}</a>
+                        <?php $sport = $match['sport']; $type = $sport_val[$sport]; ?>
+                        <a href="/{{$type}}/{{$match['mid']}}.html" title="{{date('m月d日 H:i', strtotime($match['time']))}} {{$match['league_name']}} {{$match['hname']}}VS{{$match['aname']}}" target="_blank">{{$match['hname']}} VS {{$match['aname']}}</a>
                     @endforeach
                     <div class="c"></div>
                 </div>
@@ -29,7 +29,7 @@
                         $hourCn = date('H:i', strtotime($match['time']));
                         $league = $match['league_name'];
                         $sport = $match['sport'];
-                        $type = $sport == 1 ? 'football' : ($sport == 2 ? 'basketball' : 'other');
+                        $type = $sport_val[$sport];
                         if ($sport == 1) {
                             $sportCn = '足球';
                         } else if ($sport == 2) {
@@ -46,11 +46,11 @@
                         ?>
                         <li>
                             <div class="tit">
-                                {{$hourCn}}<strong class="b"><a target="_blank" href="/live/{{$type}}.html" title="{{$league}}直播">{{$league}}</a></strong>
-                                <a href="/live/{{$type}}/{{$match['mid']}}.html" title="{{$m_title}}" target="_blank">{{$matchInfo}}</a>
+                                {{$hourCn}}<strong class="b"><a target="_blank" href="/{{$type}}/" title="{{$league}}直播">{{$league}}</a></strong>
+                                <a href="/{{$type}}/{{$match['mid']}}.html" title="{{$m_title}}" target="_blank">{{$matchInfo}}</a>
                             </div>
                             <div class="con">
-                                <a href="/live/{{$type}}/{{$match['mid']}}.html" target="_blank">球探直播</a>
+                                <a href="/{{$type}}/{{$match['mid']}}.html" target="_blank">球探直播</a>
                             </div>
                         </li>
                     @endforeach
@@ -72,15 +72,15 @@
                 </div>
             @endif
             @if(isset($videos))
-                @foreach($videos as $vt=>$videoArray)
+                @foreach($videos as $data)
                     <div class="box">
-                        <h2>{{isset($type_cn[$vt]) ? $type_cn[$vt] : ''}}视频录像<a class="more" href="/live/videos">+更多</a></h2>
+                        <h2>{{isset($data['league']['lname']) ? $data['league']['lname'] : ''}}视频录像<a class="more" href="/video/">+更多</a></h2>
                         <ul id="content_zuqiu">
-                            @foreach($videoArray as $video)
-                                <?php $time = date('m-d H:i', $video['time']); ?>
+                            @foreach($data['videos'] as $video)
+                                <?php $time = date('m-d H:i', strtotime($video['time'])); ?>
                                 <li>
-                                    <a href="/live/videos/detail/{{$video['id']}}.html" class="hei" target="_blank">{{$video['hname'] . ' VS ' . $video['aname']}}</a>
-                                    <a href="/live/videos/detail/{{$video['id']}}.html{{--\App\Http\Controllers\PC\CommonTool::subjectLink($video['id'], 'video')--}}" class="ml5" target="_blank">录像</a>
+                                    <a href="/video/{{$video['id']}}.html" class="hei" target="_blank">{{$video['hname'] . ' VS ' . $video['aname']}}</a>
+                                    <a href="/video/{{$video['id']}}.html" class="ml5" target="_blank">录像</a>
                                 </li>
                             @endforeach
                         </ul>

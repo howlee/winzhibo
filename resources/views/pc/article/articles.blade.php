@@ -24,7 +24,7 @@
                         @foreach($matches as $match)
                             <?php
                                 $sport = $match['sport'];
-                                $type = $sport == 1 ? 'football' : ($sport == 2 ? 'basketball' : 'other');
+                                $type = \App\Http\Controllers\PC\Live\LiveController::SPORT_VAL_ARRAY[$sport];
                                 $time = date('m-d H:i', strtotime($match['time']));
                                 if ($sport == 3) {
                                     $info = $match['lname'] . ' ' . $match['hname'] . (empty($match['aname']) ? '' : (' VS ' . $match['aname']) );
@@ -33,8 +33,8 @@
                                 }
                             ?>
                             <li>
-                                <a href="/live/{{$type}}/{{$match['mid']}}.html" class="hei" target="_blank">{{$info}}</a>
-                                <a href="/live/{{$type}}/{{$match['mid']}}.html" class="ml5" target="_blank">高清直播</a>
+                                <a href="/{{$type}}/{{$match['mid']}}.html" class="hei" target="_blank">{{$info}}</a>
+                                <a href="/{{$type}}/{{$match['mid']}}.html" class="ml5" target="_blank">高清直播</a>
                             </li>
                         @endforeach
                     </ul>

@@ -7,9 +7,12 @@
                 <h2>综合视频录像集锦</h2>
                 <ul>
                     @foreach($videos as $video)
-                        <?php $info = $video['lname'] . ' ' . date('m月d日 H:i', $video['time']) . ' ' . $video['hname'] . ' VS ' . $video['aname']; ?>
+                        <?php
+                            $time = strtotime($video['time']);
+                            $info = $video['lname'] . ' ' . date('m月d日 H:i', $time) . ' ' . $video['hname'] . ' VS ' . $video['aname'];
+                        ?>
                         <li>
-                            <a class="v" href="/live/videos/detail/{{$video['id']}}.html" title="{{$info}}" target="_blank">{{$info}}</a>
+                            <a class="v" href="/video/{{$video['id']}}.html" title="{{$info}}" target="_blank">{{$info}}</a>
                         </li>
                     @endforeach
                 </ul>
@@ -24,7 +27,7 @@
                         @foreach($matches as $match)
                             <?php
                                 $sport = $match['sport'];
-                                $type = $sport == 1 ? 'football' : ($sport == 2 ? 'basketball' : 'other');
+                                $type = \App\Http\Controllers\PC\Live\LiveController::SPORT_VAL_ARRAY[$sport];
                                 $time = date('m-d H:i', strtotime($match['time']));
                                 if ($sport == 3) {
                                     $info = $match['lname'] . ' ' . $match['hname'] . (empty($match['aname']) ? '' : (' VS ' . $match['aname']) );
@@ -33,8 +36,8 @@
                                 }
                             ?>
                             <li>
-                                <a href="/live/{{$type}}/{{$match['mid']}}.html" class="hei" target="_blank">{{$info}}</a>
-                                <a href="/live/{{$type}}/{{$match['mid']}}.html" class="ml5" target="_blank">高清直播</a>
+                                <a href="/{{$type}}/{{$match['mid']}}.html" class="hei" target="_blank">{{$info}}</a>
+                                <a href="/{{$type}}/{{$match['mid']}}.html" class="ml5" target="_blank">高清直播</a>
                             </li>
                         @endforeach
                     </ul>
