@@ -6,9 +6,9 @@
     <div class="container">
         <div class="wrap" style="background-color: #ffffff;">
             <div class="header">
-                <a href="{{$m}}"><img src="/img/mobile/wap_logo.png"/></a>
+                <a href="{{$m}}/"><img src="/img/mobile/wap_logo.png"/></a>
             </div>
-            <div class="crumbs"><a href="{{$m}}">首页</a> - <a href="{{$m}}/video/">录像</a> - <span>{{$video["lname"]}} {{$video["hname"]}} vs {{$video["aname"]}}</span></div>
+            <div class="crumbs"><a href="{{$m}}/">首页</a> - <a href="{{$m}}/video/">录像</a> - <span>{{$video["lname"]}} {{$video["hname"]}} vs {{$video["aname"]}}</span></div>
             <div class="game-list" style="display:block;">
                 <div class="game-item cPbtn" style="text-align: center;">
                     <div class="team-left">

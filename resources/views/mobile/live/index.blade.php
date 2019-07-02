@@ -10,7 +10,7 @@
 <div class="container">
     <div class="wrap">
         <div class="header">
-            <a href="{{$m}}"><img src="/img/mobile/wap_logo.png"/></a>
+            <a href="{{$m}}/"><img src="/img/mobile/wap_logo.png"/></a>
         </div>
         <div class="module saishi shaixuan">
             <span value="all" @if($sport == 0)class="current"@endif>@if($sport == 0) 全部 @else <a href="{{$m}}/">全部</a> @endif</span>

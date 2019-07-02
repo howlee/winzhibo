@@ -18,7 +18,7 @@ Route::group(["namespace" => 'Live'], function () {
     Route::get("/zuqiu/", "LiveController@zuqiu");//足球直播列表
     Route::get("/nba/", "LiveController@nba");//篮球直播列表
 
-    Route::get("/detail/{sport}_{mid}.html", "LiveController@detail");//直播终端
+    Route::get("/detail/{mid}.html", "LiveController@detail");//直播终端
 
 
     Route::get("/video/", "LiveController@videos");
