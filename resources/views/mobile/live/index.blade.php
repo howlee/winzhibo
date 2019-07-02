@@ -1,4 +1,11 @@
 @extends('mobile.layout.base')
+@section("css")
+    <style>
+        .score-live {
+            color: #e42d2d;
+        }
+    </style>
+@endsection
 @section("content")
 <div class="container">
     <div class="wrap">
@@ -18,6 +25,7 @@
                     <?php
                     $sport = $match['sport'];
                     $pName = $sport == 1 ? 'football' : ($sport == 2 ? 'basketball' : 'other');
+                    $living = $match['status'] > 0 || strtotime($match['time']) <= time();
                     ?>
                     <a href="{{$m}}/{{$sport_val[$sport]}}/{{$match['mid']}}.html" class="game-item cPbtn" style="text-align: center;">
                         @if($sport == 3)
@@ -32,7 +40,7 @@
                                 <div class="team-score">
                                     <bifen class="id126275">
                                         <p class="score-num gray">
-                                            <span class="score score126275"> VS </span>
+                                            <span class="score {{$living ? 'score-live' : ''}}">{{$living ? '直播中' : ' VS '}}</span>
                                         </p>
                                     </bifen>
                                     <p class="live" style="">{{$match['league_name']}}</p>

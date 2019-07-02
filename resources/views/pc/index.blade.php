@@ -43,11 +43,13 @@
                             $matchInfo = $matchInfo . ' VS ' . $match['aname'];
                         }
                         $m_title = date('m月d日 H:i', strtotime($match['time'])) . ' ' . $sportCn . ' ' . $matchInfo . '直播';
+                        $living = $match['status'] > 0 || strtotime($match['time']) <= time();
                         ?>
                         <li>
                             <div class="tit">
                                 {{$hourCn}}<strong class="b"><a target="_blank" href="/{{$type}}/" title="{{$league}}直播">{{$league}}</a></strong>
                                 <a href="/{{$type}}/{{$match['mid']}}.html" title="{{$m_title}}" target="_blank">{{$matchInfo}}</a>
+                                @if($living)<span style="color: #e42d2d;padding-left: 20px;">直播中</span>@endif
                             </div>
                             <div class="con">
                                 <a href="/{{$type}}/{{$match['mid']}}.html" target="_blank">红单直播</a>
