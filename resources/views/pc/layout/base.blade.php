@@ -30,14 +30,14 @@
     </div>
     @yield('crumbs')
     @yield('main')
-    <div id="zc_link">
-        <h3>友情链接</h3>
-        <div class="show">
-            <a href="http://www.quanqiutiyu.cc" target="_blank">BOSS直播</a>
-            <a href="http://www.xijiazhibo.cc" target="_blank">JRS直播</a>
-            <a href="https://www.baidu.com/s?wd=site%3Awww.qiutantiyu.cc" target="_blank">百度</a>
-        </div>
-    </div>
+    {{--<div id="zc_link">--}}
+        {{--<h3>友情链接</h3>--}}
+        {{--<div class="show">--}}
+            {{--<a href="http://www.quanqiutiyu.cc" target="_blank">BOSS直播</a>--}}
+            {{--<a href="http://www.xijiazhibo.cc" target="_blank">JRS直播</a>--}}
+            {{--<a href="https://www.baidu.com/s?wd=site%3A{{env('HOST', 'www.hongdanzhibo.com')}}" target="_blank">百度</a>--}}
+        {{--</div>--}}
+    {{--</div>--}}
     <div id="zc_foot">
         {{--<p>红单直播 <a href="http://www.qqzhibo.net/sitemap.xml" target="_blank">sitemap</a></p>--}}
         <p>视频信号整理自互联网，如有侵权请告知我们 我们会在第一时间删除</p>
