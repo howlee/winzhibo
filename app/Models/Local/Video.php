@@ -50,6 +50,7 @@ class Video extends Model
 
         $localVideo->sport = $video["sport"];
         $localVideo->stage_cn = $video["stage_cn"];
+        $localVideo->round = $video["round"];
         $localVideo->season = $video["season"];
         $localVideo->mid = $video["mid"];
         $localVideo->lname = $video["lname"];
