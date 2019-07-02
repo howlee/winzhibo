@@ -28,10 +28,10 @@
                         </div>
                         <div class="game-info">
                             <div class="team-score">
-                                <p class="live" style="">{{$video['lname']}} </p>
                                 <bifen class="id126275">
-                                    <p class="score-num gray"><span class="score score126275"> VS </span></p>
+                                    <p class="score-num gray"><span class="score score126275">{{$video['hscore']}} - {{$video['ascore']}}</span></p>
                                 </bifen>
+                                <p class="live" style="">{{$video['lname']}} </p>
                                 <p class="time" style=""><span>{{date('H:i', strtotime($video['time']))}}</span></p>
                             </div>
                         </div>
@@ -45,16 +45,13 @@
                 </div>
             @endforeach
         </div>
-
-        <div class="footer-bar">
-            <a href="/m/" style="width: 50%;"><i class="live"></i><p>直播</p></a>
-            <a class="active" style="width: 50%;"><i class="luxiang-on"></i><p>录像</p></a>
-        </div>
+        @include('mobile.layout.bottom')
     </div>
 </div>
 @endsection
 @section("js")
-    <script type="text/javascript" src="/js/m/videos.js"></script>
     <script type="text/javascript">
+        window.m = '{{$m}}';
     </script>
+    <script type="text/javascript" src="/js/m/videos.js"></script>
 @endsection

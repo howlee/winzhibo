@@ -5,7 +5,7 @@
             <div class="header">
                 <a href="{{$m}}"><img src="/img/mobile/wap_logo.png"/></a>
             </div>
-            <div class="crumbs"><a href="{{$m}}">首页</a> - <span>{{$match["league_name"]}} {{$match["hname"]}} vs {{$match["aname"]}}</span></div>
+            <div class="crumbs"><a href="{{$m}}">首页</a> @if(isset($parent)) - <a href="{{$m . $parent['link']}}">{{$parent['name']}}</a> @endif - <span>{{$match["league_name"]}} {{$match["hname"]}} vs {{$match["aname"]}}</span></div>
             <div class="game-list" style="display:block;">
                 <div class="game-item cPbtn" style="text-align: center;">
                     <div class="team-left">

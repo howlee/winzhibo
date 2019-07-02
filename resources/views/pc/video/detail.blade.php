@@ -1,4 +1,9 @@
 @extends('pc.layout.base')
+@section('crumbs')
+    <div class="crumbs">
+        <a href="/">首页</a> - <a href="/video/">录像</a> - <span>{{$info}}</span>
+    </div>
+@endsection
 @section('main')
     <div id="zc_main">
         <div class="left l" style="width: 960px;">
@@ -6,7 +11,12 @@
                 <h2>{{isset($match['time']) ? substr($match['time'], 0, 16) : ''}} {{$info}}</h2>
                 <div class="tip">如果以下信号都无效，请进入<a href="/">球探直播</a>主页查看最新直播信号 </div>
                 <div class="channel">
-                    <p>【站外录像】： <a href="{{$link}}" target="_blank">高清录像</a></p>
+                    <p>【站外录像】</p>
+                    <div>
+                        @foreach($channels as $channel)
+                        <p><a rel="nofollow" href="{{$channel["content"]}}" target="_blank">{{$channel["title"]}}</a></p>
+                        @endforeach
+                    </div>
                 </div>
             </div>
             <div class="box" style="width: 960px;">

@@ -311,10 +311,21 @@ a.v_fun{background:url(v_fun.gif) 3px 2px no-repeat;padding:2px 0px 2px 22px;}
 #zc_gotop{ width:50px; height:74px; position:fixed; right:10px; bottom:10px; display:none;}
 #zc_gotop a{ width:50px; height:74px; display:block; background:url(gotop.png) no-repeat;}
 #zc_gotop a:hover{background:url(gotop.png) -50px 0px no-repeat;}
+.crumbs {
+  width: 960px;
+  height: 32px;
+  font-size: 13px;
+  line-height: 32px;
+  color: #999;
+  margin: 0 auto;
+  margin-bottom: 10px;
+}
+.crumbs a {
+  color: #999;
+}
+/*.bg_index{background-image:url("http://ww1.sinaimg.cn/large/5f77f7c2jw1f1qgbokz7lj215o0cxdhu.jpg");background-attachment:fixed;background-position:50% 250px;background-repeat:no-repeat;}*/
+/*.bg_wangqiu{background-image:url("http://ww2.sinaimg.cn/large/a39ca5d8gw1f1pkiu8ou3j215o0btn0i.jpg");background-attachment:fixed;background-position:50% 250px;background-repeat:no-repeat;}*/
+/*.bg_f1{background-image:url("http://ww2.sinaimg.cn/large/a39ca5d8gw1f1pkiu8ou3j215o0btn0i.jpg");background-attachment:fixed;background-position:50% 250px;background-repeat:no-repeat;}*/
 
-.bg_index{background-image:url("http://ww1.sinaimg.cn/large/5f77f7c2jw1f1qgbokz7lj215o0cxdhu.jpg");background-attachment:fixed;background-position:50% 250px;background-repeat:no-repeat;}
-.bg_wangqiu{background-image:url("http://ww2.sinaimg.cn/large/a39ca5d8gw1f1pkiu8ou3j215o0btn0i.jpg");background-attachment:fixed;background-position:50% 250px;background-repeat:no-repeat;}
-.bg_f1{background-image:url("http://ww2.sinaimg.cn/large/a39ca5d8gw1f1pkiu8ou3j215o0btn0i.jpg");background-attachment:fixed;background-position:50% 250px;background-repeat:no-repeat;}
 
-
-.wangjing{ background-image:url("http://ww1.sinaimg.cn/large/5f77f7c2jw1f3f5wss6nxj2064064jrc.jpg");background-size:40px 40px; background-position:5px; background-repeat:no-repeat;width:254px; height:40px; padding:5px 5px 5px 45px; border:1px solid #cbe0f6;font-size:13px; color:red;font-family:"微软雅黑";line-height:20px;}
+/*.wangjing{ background-image:url("http://ww1.sinaimg.cn/large/5f77f7c2jw1f3f5wss6nxj2064064jrc.jpg");background-size:40px 40px; background-position:5px; background-repeat:no-repeat;width:254px; height:40px; padding:5px 5px 5px 45px; border:1px solid #cbe0f6;font-size:13px; color:red;font-family:"微软雅黑";line-height:20px;}*/

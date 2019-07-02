@@ -7,6 +7,11 @@
         }
     </style>
 @endsection
+@section('crumbs')
+    <div class="crumbs">
+        <a href="/">首页</a> - <a href="/news/">热点资讯</a> - <span>{{$article->title}}</span>
+    </div>
+@endsection
 @section('main')
     <div id="zc_main">
         <div class="left l" style="width: 960px;">

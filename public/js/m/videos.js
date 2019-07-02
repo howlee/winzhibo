@@ -26,7 +26,8 @@ function loadVideos() {
     var hasPage = window.curPage < window.lastPage;
     if (!isLoading && hasPage) {
         window.loadPage = true;
-        var url = '/json/subject/videos/all/' + (curPage + 1) + '.json';//location.href;
+        //var url = '/json/subject/videos/all/' + (curPage + 1) + '.json';//location.href;
+        var url = window.m + '/video/' + (curPage + 1) + '.json';
         var week = ['周日','周一','周二','周三','周四','周五','周六'];
         $.ajax({
             "url": url,
@@ -81,6 +82,8 @@ function createdVideoHtml(match) {
 
     var hicon = match.hicon;
     var aicon = match.aicon;
+    var hscore = match.hscore;
+    var ascore = match.ascore;
 
     if (!hicon) {
         hicon = '//static.liaogou168.com/img/icon_team_default.png';
@@ -104,7 +107,7 @@ function createdVideoHtml(match) {
     html += '<div class="game-info">';
     html += '<div class="team-score">';
     html += '<bifen class="id126275">';
-    html += '<p class="score-num gray"><span class="score"> VS </span></p>';
+    html += '<p class="score-num gray"><span class="score"> ' + hscore + ' - ' + ascore + ' </span></p>';
     html += '</bifen>';
     html += '<p class="live" style="">' + match.lname + ' </p>';
     html += '<p class="time" style=""><span>' + hour + ':' + minute + '</span></p>';
@@ -130,7 +133,7 @@ function subjectVideoLink(id) {
     }
     var first = idStr.substr(0, 2);
     var second = idStr.substr(2, 4);
-    return "http://www.aikq.cc/m/live/subject/video/" + first + "/" + second + "/" + id + ".html";
+    return window.m + "/video/" + id + ".html";
 }
 
 function getPageScroll() {

@@ -30,6 +30,7 @@
             </ul>
         </div>
     </div>
+    @yield('crumbs')
     @yield('main')
     <div id="zc_link">
         <h3>友情链接</h3>

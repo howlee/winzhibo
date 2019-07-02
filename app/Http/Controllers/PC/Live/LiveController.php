@@ -211,6 +211,10 @@ class LiveController extends Controller
         $result['title'] = $info;
         $result['keywords'] = '';
         $result['description'] = '';
+        if ($sport == 1 || $sport == 2) {
+            $result['parent']['link'] = $sport == 1 ? '/zuqiu/' : '/nba/';
+            $result['parent']['name'] = $sport == 1 ? '足球' : '篮球';
+        }
         return view('pc.live.detail', $result);
     }
 
@@ -245,7 +249,6 @@ class LiveController extends Controller
     public function videoDetailHtml($video) {
         $league = $video['lname'];
         $info = $league . ' ' . $video['hname'] . (empty($video['aname']) ? '' : (' VS ' . $video['aname']) ) ;
-        //$video['time'] = date('Y-m-d H:i:s', $video['time']);
         $result['match'] = $video;
         $result['info'] = $info;
         $result['league'] = $league;
@@ -254,34 +257,11 @@ class LiveController extends Controller
         $result['keywords'] = '';
         $result['description'] = '';
 
-        $channels = $video['channels'];
-        $result['link'] = isset($channels[0]) ? $channels[0]['link'] : '';
+        $result['channels'] = $video['channels'];
         return view('pc.video.detail', $result);
     }
 
     //=========================================================  获取数据 =========================================================//
-
-    /**
-     * 获取第一页得录像数据
-     * @param $type
-     * @param $page
-     * @return array
-     */
-    private function getVideoTypeByPage($type, $page = 1) {
-        $array = self::VIDEO_ID_ARRAY;
-        if (!isset($array[$type])) {
-            return [];
-        }
-
-        try {
-            $id = $array[$type];
-            $cache = Storage::get('/public/static/json/subject/videos/' . $id . '/' . $page . '.json');
-            $json = json_decode($cache, true);
-        } catch (\Exception $exception) {
-            return [];
-        }
-        return $json;
-    }
 
     /**
      * 根据类型获取指定录像数组

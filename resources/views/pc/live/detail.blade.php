@@ -2,6 +2,11 @@
 @section("meta")
 <meta name="robots"content="nofollow">
 @endsection
+@section('crumbs')
+    <div class="crumbs">
+        <a href="/">首页</a>@if(isset($parent)) - <a href="{{$parent["link"]}}">{{$parent["name"]}}</a>@endif - <span>{{$info}}</span>
+    </div>
+@endsection
 @section('main')
     <div id="zc_main">
         <div class="left l" style="width: 960px;">
