@@ -79,9 +79,13 @@
                         <h2>{{isset($data['league']['lname']) ? $data['league']['lname'] : ''}}视频录像<a class="more" href="/video/">+更多</a></h2>
                         <ul id="content_zuqiu">
                             @foreach($data['videos'] as $video)
+                                <?php
+                                    $round = !empty($video['round']) ? ' 第' . $video['round'] . '轮 ' : '';
+                                    $vInfo = $video['lname'] . ' ' . $video['stage_cn'] . ' ' . $round . $video['hname'] . ' VS ' . $video['aname'];
+                                ?>
                                 <?php $time = date('m-d H:i', strtotime($video['time'])); ?>
                                 <li>
-                                    <a href="/video/{{$video['id']}}.html" class="hei" target="_blank">{{$video['lname'] . ' ' . $video['stage_cn'] . ' ' . $video['hname'] . ' VS ' . $video['aname']}}</a>
+                                    <a href="/video/{{$video['id']}}.html" class="hei" target="_blank">{{$vInfo}}</a>
                                     <a href="/video/{{$video['id']}}.html" class="ml5" target="_blank">录像</a>
                                 </li>
                             @endforeach
