@@ -81,7 +81,7 @@
                             @foreach($data['videos'] as $video)
                                 <?php $time = date('m-d H:i', strtotime($video['time'])); ?>
                                 <li>
-                                    <a href="/video/{{$video['id']}}.html" class="hei" target="_blank">{{$video['hname'] . ' VS ' . $video['aname']}}</a>
+                                    <a href="/video/{{$video['id']}}.html" class="hei" target="_blank">{{$video['lname'] . ' ' . $video['stage_cn'] . ' ' . $video['hname'] . ' VS ' . $video['aname']}}</a>
                                     <a href="/video/{{$video['id']}}.html" class="ml5" target="_blank">录像</a>
                                 </li>
                             @endforeach

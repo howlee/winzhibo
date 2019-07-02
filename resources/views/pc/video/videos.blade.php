@@ -8,7 +8,7 @@
                     @foreach($videos as $video)
                         <?php
                             $time = strtotime($video['time']);
-                            $info = $video['lname'] . ' ' . date('m月d日 H:i', $time) . ' ' . $video['hname'] . ' VS ' . $video['aname'];
+                            $info = date('m月d日 H:i', $time) . ' ' . $video['lname'] . ' ' . $video['stage_cn'] . ' ' . $video['hname'] . ' VS ' . $video['aname'];
                         ?>
                         <li>
                             <a class="v" href="/video/{{$video['id']}}.html" title="{{$info}}" target="_blank">{{$info}}</a>
