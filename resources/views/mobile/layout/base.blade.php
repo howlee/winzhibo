@@ -8,6 +8,22 @@
     <meta charset="utf-8" >
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
     <meta name="applicable-device" content="mobile" >
+    @yield("first_js")
+    <script>
+          if(!/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+                var url = window.location.href;
+                var path = location.pathname;
+                if (window.pathReg && window.pathReg.test(path) ) {
+                  url = url.replace(path, "");
+                } else if (path == "/live/" || path == "/live") {
+                  url = url.replace("/live/", "").replace("/live", "");
+                } else if (/^\/(\w+\/)team\d+(_\w+_\d+).html/.test(path) ) {
+                  url = url.replace(/_\w+_\d+/, "");
+                }
+                url = url.replace(/(https?:\/\/)m\./, "$1www.");
+                window.location.href = url;
+          }
+    </script>
     <link href="/css/mobile/style.css" rel="stylesheet" >
     <link href="/css/mobile/font-awesome.min.css" rel="stylesheet">
     @yield("css")
@@ -43,7 +59,7 @@
   var _hmt = _hmt || [];
   (function() {
     var hm = document.createElement("script");
-    hm.src = "https://hm.baidu.com/hm.js?bea178e04cbf7ca1b6e231665baf94cf";
+    hm.src = "https://hm.baidu.com/hm.js?f83759b4187ea14a212918961719d3e4";
     var s = document.getElementsByTagName("script")[0];
     s.parentNode.insertBefore(hm, s);
   })();

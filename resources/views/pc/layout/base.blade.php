@@ -6,6 +6,22 @@
     <title>{{empty($title) ? '免费直播_NBA直播' : $title}}-红单直播</title>
     <meta name="keywords" content="{{empty($keywords) ? '足球直播,英超直播,NBA直播,欧冠直播' : $keywords}}">
     <meta name="description" content="{{empty($description) ? '免费的体育直播网站。高清足球直播、NBA直播、英超直播等全部免费看。' : $description}}">
+    @yield("first_js")
+    <script>
+        if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+            var url = window.location.href;
+            var path = location.pathname;
+            if (window.pathReg && window.pathReg.test(path) ) {
+              url = url.replace(path, "");
+            } else if (path == "/live/" || path == "/live") {
+              url = url.replace("/live/", "").replace("/live", "");
+            } else if (/^\/(\w+\/)team\d+(_\w+_\d+).html/.test(path) ) {
+              url = url.replace(/_\w+_\d+/, "");
+            }
+            url = url.replace(/(https?:\/\/)(www\.)?/, "$1m.");
+            window.location.href = url;
+      }
+    </script>
     <link rel="Shortcut Icon" data-ng-href="{{env('CDN_URL')}}/img/ico.ico" href="{{env('CDN_URL')}}/img/ico.ico">
     <link href="{{env('CDN_URL')}}/css/pc/style.css" type="text/css" rel="stylesheet" />
     @yield('css')
@@ -49,7 +65,7 @@
     var _hmt = _hmt || [];
     (function() {
         var hm = document.createElement("script");
-        hm.src = "https://hm.baidu.com/hm.js?bea178e04cbf7ca1b6e231665baf94cf";
+        hm.src = "https://hm.baidu.com/hm.js?f83759b4187ea14a212918961719d3e4";
         var s = document.getElementsByTagName("script")[0];
         s.parentNode.insertBefore(hm, s);
     })();
