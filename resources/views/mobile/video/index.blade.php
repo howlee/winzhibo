@@ -14,8 +14,8 @@
                     <?php
                         $id = $video['id'];
                         $path = $m . "/video/" . $id .".html";
-                        $hicon = !empty($match['hicon']) ? ($match['hicon']) : '//static.liaogou168.com/img/icon_team_default.png';
-                        $aicon = !empty($match['aicon']) ? $match['aicon'] : '//static.liaogou168.com/img/icon_team_default.png';
+                        $hicon = !empty($video['hicon']) ? ($video['hicon']) : '//static.liaogou168.com/img/icon_team_default.png';
+                        $aicon = !empty($video['aicon']) ? $video['aicon'] : '//static.liaogou168.com/img/icon_team_default.png';
 
                         $hicon = str_replace('static.cdn.dlfyb.com', 'static.liaogou168.com', $hicon);
                         $aicon = str_replace('static.cdn.dlfyb.com', 'static.liaogou168.com', $aicon);

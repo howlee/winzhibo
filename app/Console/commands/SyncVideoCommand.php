@@ -37,6 +37,8 @@ class SyncVideoCommand extends Command
         foreach ($videos as $video) {
             VideoService::saveVideoAndChannels($video);
         }
+        echo "curPage = " . $data["curPage"] . "       ";
+        echo "lastPage = " . $data["lastPage"] . "\n";
     }
 
 }

@@ -1,4 +1,3 @@
-<?php $title="热点资讯"; ?>
 @extends('pc.layout.base')
 @section('main')
     <div id="zc_main">

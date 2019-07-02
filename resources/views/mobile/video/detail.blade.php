@@ -17,10 +17,10 @@
                     </div>
                     <div class="game-info">
                         <div class="team-score">
-                            <p class="live" style="">{{$video["lname"]}}</p>
                             <bifen class="id126275">
-                                <p class="score-num gray"><span class="score"> VS </span></p>
+                                <p class="score-num gray"><span class="score">{{$video["hscore"]}} - {{$video["ascore"]}}</span></p>
                             </bifen>
+                            <p class="live" style="">{{$video["lname"]}}</p>
                             <p class="time" style=""><span>{{substr($video["time"], 0, 16)}}</span></p>
                         </div>
                     </div>
@@ -39,10 +39,7 @@
                     </div>
                 </div>
             </div>
-            <div class="footer-bar">
-                <a href="/m/" style="width: 50%;"><i class="live"></i><p>直播</p></a>
-                <a href="{{$m}}/video/" style="width: 50%;"><i class="luxiang"></i><p>录像</p></a>
-            </div>
+            @include('mobile.layout.bottom')
         </div>
     </div>
 @endsection

@@ -30,10 +30,12 @@
                             </div>
                             <div class="game-info">
                                 <div class="team-score">
-                                    <p class="live" style="">{{$match['league_name']}}</p>
                                     <bifen class="id126275">
-                                        <p class="score-num gray"><span class="score score126275"> VS </span></p>
+                                        <p class="score-num gray">
+                                            <span class="score score126275"> VS </span>
+                                        </p>
                                     </bifen>
+                                    <p class="live" style="">{{$match['league_name']}}</p>
                                     <p class="time" style=""><span>{{substr($match['time'], 10, 6)}}</span></p>
                                 </div>
                             </div>

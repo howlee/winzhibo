@@ -3,7 +3,7 @@
 <head>
     @yield("meta")
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>{{empty($title) ? '免费直播_NBA直播' : $title}}-球探直播</title>
+    <title>{{empty($title) ? '免费直播_NBA直播' : $title}}-红单直播</title>
     <meta name="keywords" content="{{empty($keywords) ? '足球直播,英超直播,NBA直播,欧冠直播' : $keywords}}">
     <meta name="description" content="{{empty($description) ? '免费的体育直播网站。高清足球直播、NBA直播、英超直播等全部免费看。' : $description}}">
     <link rel="Shortcut Icon" data-ng-href="{{env('CDN_URL')}}/img/ico.ico" href="{{env('CDN_URL')}}/img/ico.ico">
@@ -13,9 +13,7 @@
 <body>
     <div id="zc_head">
         <div class="head">
-            <div class="logo l">
-                <a href="/"><img src="/img/pc/pc_logo.png" alt="球探直播"></a>
-            </div>
+            <div><a href="/"><img class="logo l" src="/img/pc/pc_logo.png" alt="红单直播"></a></div>
         </div>
         <div class="nav">
             <div class="left"></div>
@@ -41,7 +39,7 @@
         </div>
     </div>
     <div id="zc_foot">
-        {{--<p>球探直播 <a href="http://www.qqzhibo.net/sitemap.xml" target="_blank">sitemap</a></p>--}}
+        {{--<p>红单直播 <a href="http://www.qqzhibo.net/sitemap.xml" target="_blank">sitemap</a></p>--}}
         <p>视频信号整理自互联网，如有侵权请告知我们 我们会在第一时间删除</p>
     </div>
 </body>

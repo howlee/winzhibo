@@ -1,4 +1,3 @@
-<?php $title="综合视频"; ?>
 @extends('pc.layout.base')
 @section('main')
     <div id="zc_main">

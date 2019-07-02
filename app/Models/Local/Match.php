@@ -41,6 +41,16 @@ class Match extends Model
             $league_name = null;
         }
 
+        //icon_teamDefault.png
+        $host_icon = $match["host_icon"];
+        $away_icon = $match["away_icon"];
+        if (!empty($host_icon) && preg_match('/teamDefault/', $host_icon)) {
+            $host_icon = null;
+        }
+        if (!empty($away_icon) && preg_match('/teamDefault/', $away_icon)) {
+            $away_icon = null;
+        }
+
         $newMatch->league_name = $league_name;
         $newMatch->lid = $match["lid"];
         $newMatch->hname = $match["hname"];
@@ -49,6 +59,8 @@ class Match extends Model
         $newMatch->aid = $match["aid"];
         $newMatch->hscore = $match["hscore"];
         $newMatch->ascore = $match["ascore"];
+        $newMatch->hicon = $host_icon;
+        $newMatch->aicon = $away_icon;
         $newMatch->status = $match["status"];
         $newMatch->time = $match["time"];
 

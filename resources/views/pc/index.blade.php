@@ -50,7 +50,7 @@
                                 <a href="/{{$type}}/{{$match['mid']}}.html" title="{{$m_title}}" target="_blank">{{$matchInfo}}</a>
                             </div>
                             <div class="con">
-                                <a href="/{{$type}}/{{$match['mid']}}.html" target="_blank">球探直播</a>
+                                <a href="/{{$type}}/{{$match['mid']}}.html" target="_blank">红单直播</a>
                             </div>
                         </li>
                     @endforeach

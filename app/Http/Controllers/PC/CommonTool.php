@@ -237,4 +237,68 @@ class CommonTool
         return $channels;
     }
 
+
+    public static function addLiveSEO($sport, array  &$result) {
+        if ($sport == 1) {
+            $result['title'] = '足球直播_英超免费看';
+            $result['keywords'] = '英超直播,中超直播,免费直播,西甲直播,中超直播';
+            $result['description'] = '免费的体育直播网站。高清足球直播、英超、中超、西甲、欧冠、意甲等直播全部免费看。';
+        } else if ($sport == 2) {
+            $result['title'] = '篮球直播_NBA直播免费看';
+            $result['keywords'] = 'NBA直播,CBA直播,篮世杯直播,WNBA直播,免费直播';
+            $result['description'] = '免费的体育直播网站。高清篮球直播、NBA、CBA、篮球世界杯等直播全部免费看。';
+        }
+    }
+
+    public static function addVideoSEO(array &$result) {
+        $result['title'] = 'NBA录像_综合视频';
+        $result['keywords'] = 'NBA录像,英超录像,西甲录像,中超录像,意甲录像';
+        $result['description'] = '红单体育为您提供最新最快的NBA录像、英超录像、欧冠录像。';
+    }
+
+    public static function addNewsSEO(array &$result) {
+        $result['title'] = "体育新闻_热点资讯";
+        $result['keywords'] = 'NBA新闻,英超新闻,中超新闻,体育新闻';
+        $result['description'] = '红单体育为您提供最新最快的NBA新闻、英超新闻、西甲新闻、中超新闻，体育新闻应有尽有。';
+    }
+
+
+    /**
+     * 直播终端title、keywords、description
+     * @param $league
+     * @param $match
+     * @param array $result
+     */
+    public static function addLiveDetailSEO($league, $match, array &$result) {
+        $info = $league . ' ' . $match['hname'] . (empty($match['aname']) ? '' : (' VS ' . $match['aname']) ) ;
+        $result['title'] = $info;
+        $result['keywords'] = $league.','.$match['hname'].(empty($match['aname']) ? '' : (',' . $match['aname']) );
+        $result['description'] = $match['time'] . ' ' . $info;
+    }
+
+    /**
+     * 录像终端title、keywords、description
+     * @param $video
+     * @param array $result
+     */
+    public static function addVideoDetailSEO($video, array &$result) {
+        $lname = $video['lname'];
+        $vs = $video['hname'] . ' vs ' . $video['aname'];
+        $result['title'] = $lname . ' ' . $vs;
+        $result['keywords'] = $lname.','.$video['hname']. ',' . $video['aname'];
+        $result['description'] = $video['time'] . ' ' . $video['season'] . ' ' . $lname . ' ' . $video['stage_cn'] . ' ' . $vs;
+    }
+
+    /**
+     * 录像终端title、keywords、description
+     * @param $news
+     * @param array $result
+     */
+    public static function addNewsDetailSEO($news, array &$result) {
+        $result['title'] = $news->title.'_热点资讯';
+        $result['description'] = $news->digest;
+        $result['keywords'] = $news->labels;
+    }
+
+
 }

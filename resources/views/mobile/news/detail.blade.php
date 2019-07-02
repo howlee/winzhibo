@@ -14,10 +14,7 @@
             <div class="content">
                 {!! $news->getContent() !!}
             </div>
-            <div class="footer-bar">
-                <a href="/m/" style="width: 50%;"><i class="live"></i><p>直播</p></a>
-                <a href="{{$m}}/video/" style="width: 50%;"><i class="luxiang"></i><p>录像</p></a>
-            </div>
+            @include('mobile.layout.bottom')
         </div>
     </div>
 @endsection

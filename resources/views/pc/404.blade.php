@@ -14,7 +14,7 @@
 <div id="zc_head">
     <div class="head">
         <div class="logo l">
-            <a href="/"><img src="/img/pc/pc_logo.png" alt="球探直播"></a>
+            <a href="/"><img src="/img/pc/pc_logo.png" alt="红单直播"></a>
         </div>
     </div>
     <div class="nav">

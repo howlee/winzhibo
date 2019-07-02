@@ -28,6 +28,8 @@ class ArticleController extends Controller
         $result["articles"] = $articles;
         $result['matches'] = LiveController::getLiveMatches();
         $result['check'] = "news";
+
+        CommonTool::addNewsSEO($result);
         return view('pc.article.articles', $result);
     }
 
@@ -42,6 +44,7 @@ class ArticleController extends Controller
 
     public function detailHtml(PcArticle $article) {
         $result['article'] = $article;
+        CommonTool::addNewsDetailSEO($article, $result);
         return view('pc.article.detail', $result);
     }
 

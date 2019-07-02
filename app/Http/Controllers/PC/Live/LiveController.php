@@ -98,8 +98,9 @@ class LiveController extends Controller
         $json['check'] = 'football';
         $json['type_cn'] = self::VIDEO_CN_ARRAY;
         $json['videos'] = $this->getVideos(['yingchao', 'zhongchao', 'xijia', 'yijia', 'dejia']);
-        $json['title'] = '足球直播_英超直播_意甲直播_德甲直播_法甲直播_中超直播_亚洲直播_免费足球直播';
         $json['sport_val'] = self::SPORT_VAL_ARRAY;
+
+        CommonTool::addLiveSEO(1, $json);
         return view('pc.index', $json);
     }
 
@@ -113,10 +114,11 @@ class LiveController extends Controller
         $json['matches'] = $matches;
         $json['week_array'] = array('星期日','星期一','星期二','星期三','星期四','星期五','星期六');
         $json['check'] = 'basketball';
-        $json['title'] = '篮球直播_篮球免费直播_NBA直播_CBA直播_NBA决赛直播_欧锦赛直播';
         $json['videos'] = $this->getVideos(['nba', 'cba']);
         $json['type_cn'] = self::VIDEO_CN_ARRAY;
         $json['sport_val'] = self::SPORT_VAL_ARRAY;
+
+        CommonTool::addLiveSEO(2, $json);
         return view('pc.index', $json);
     }
 
@@ -192,14 +194,13 @@ class LiveController extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function detailMatchHtml($sport, $match) {
+        $league = $match['league_name'];
         if ($sport == 3) {
-            $league = $match['league_name'];
-            if (empty($league)) {
+            if (empty($league) && !empty($match['project'])) {
                 $league = $match['project'];
             }
         } else {
-            $league = $match['league_name'];
-            if (empty($league)) {
+            if (empty($league) && !empty($match['win_lname'])) {
                 $league = $match['win_lname'];
             }
         }
@@ -215,6 +216,7 @@ class LiveController extends Controller
             $result['parent']['link'] = $sport == 1 ? '/zuqiu/' : '/nba/';
             $result['parent']['name'] = $sport == 1 ? '足球' : '篮球';
         }
+        CommonTool::addLiveDetailSEO($league, $match, $result);
         return view('pc.live.detail', $result);
     }
 
@@ -233,6 +235,8 @@ class LiveController extends Controller
         $result['matches'] = self::getLiveMatches();
         $result['week_array'] = array('星期日','星期一','星期二','星期三','星期四','星期五','星期六');
         $result['check'] = 'video';
+
+        CommonTool::addVideoSEO($result);
         return view('pc.video.videos', $result);
     }
 
@@ -252,12 +256,8 @@ class LiveController extends Controller
         $result['match'] = $video;
         $result['info'] = $info;
         $result['league'] = $league;
-
-        $result['title'] = $info;
-        $result['keywords'] = '';
-        $result['description'] = '';
-
         $result['channels'] = $video['channels'];
+        CommonTool::addVideoDetailSEO($video, $result);
         return view('pc.video.detail', $result);
     }
 

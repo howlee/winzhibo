@@ -76,6 +76,8 @@ class LiveController extends Controller
         $result['m'] = env('TEST_M', '');
         $result['sport'] = $sport;
         $result['bar'] = 'live';
+
+        CommonTool::addLiveSEO($sport, $result);
         return view('mobile.live.index', $result);
     }
 
@@ -104,6 +106,7 @@ class LiveController extends Controller
         $result['videos'] = $videoArray;
         $result['m'] = env('TEST_M', '');
         $result['bar'] = 'luxiang';
+        CommonTool::addVideoSEO($result);
         return view('mobile.video.index', $result);
     }
 
@@ -121,23 +124,6 @@ class LiveController extends Controller
         return response()->json($videoArray);
     }
 
-    /**
-     * 录像终端
-     * @param Request $request
-     * @param $id
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function video(Request $request, $id) {
-        $video = Video::query()->find($id);
-        if (!isset($video)) return abort(404);
-        $result['video'] = $video;
-        $result["channels"] = $video->channels;
-        $result['aicon'] = '';
-        $result['hicon'] = '';
-        $result['m'] = env('TEST_M', '');
-        return view('mobile.video.detail', $result);
-    }
-
 
     /**
      * 资讯列表
@@ -150,6 +136,8 @@ class LiveController extends Controller
         $result['news'] = $news;
         $result['m'] = env('TEST_M', '');
         $result['bar'] = 'zixun';
+
+        CommonTool::addNewsSEO($result);
         return view('mobile.news.index', $result);
     }
 
@@ -198,7 +186,30 @@ class LiveController extends Controller
             $result['parent']['link'] = '/'.$sport_val[$sport].'/';
             $result['parent']['name'] = $sport == 1 ? '足球' : '篮球';
         }
+        $league = $match['league_name'];
+        if (empty($league) && !empty($match['project'])) {
+            $league = $match['project'];
+        }
+        CommonTool::addLiveDetailSEO($league, $match, $result);
         return view('mobile.live.detail', $result);
+    }
+
+    /**
+     * 录像终端
+     * @param Request $request
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function video(Request $request, $id) {
+        $video = Video::query()->find($id);
+        if (!isset($video)) return abort(404);
+        $result['video'] = $video;
+        $result["channels"] = $video->channels;
+        $result['hicon'] = $video["hicon"];
+        $result['aicon'] = $video["aicon"];
+        $result['m'] = env('TEST_M', '');
+        CommonTool::addVideoDetailSEO($video, $result);
+        return view('mobile.video.detail', $result);
     }
 
     public function newsDetail(Request $request, $id) {
@@ -209,6 +220,7 @@ class LiveController extends Controller
 
         $result['m'] = env('TEST_M', '');
         $result['news'] = $news;
+        CommonTool::addNewsDetailSEO($news, $result);
         return view('mobile.news.detail', $result);
     }
 

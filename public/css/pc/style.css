@@ -38,8 +38,8 @@ a.v_fun{background:url(v_fun.gif) 3px 2px no-repeat;padding:2px 0px 2px 22px;}
 #zc_head .top i{ font-style:normal; color:#333;}
 #zc_head .top span{ float:right;}
 #zc_head .top span a{ margin:0px 5px;}
-#zc_head .head{ height:70px; margin:3px 0px;}
-#zc_head .head .logo{ width:230px; height:70px;}
+#zc_head .head{ height:90px; margin:3px 0px;}
+#zc_head .head .logo{ width:250px; height:90px;}
 #zc_head .nav{height:30px;font-size:15px;font-family:"微软雅黑";font-weight:bold;text-align:center;line-height:32px;background:url(../../img/pc/nav_bg.gif) 0 -30px; overflow:hidden;border-bottom:3px solid #286cb3;}
 #zc_head .nav .left,#zc_head .nav .right{ width:3px;height:30px; float:left;}
 #zc_head .nav .left{ background:url(../../img/pc/nav_bg.gif);}

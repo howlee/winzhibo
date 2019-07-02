@@ -1,4 +1,3 @@
-<?php $title = $article->title.'_热点资讯'; ?>
 @extends('pc.layout.base')
 @section("css")
     <style>
