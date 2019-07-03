@@ -62,10 +62,10 @@ class SpiderArticleDetailCommand extends Command
         $articles = $query->get();
 
 
-
         foreach ($articles as $article) {
             $id = $article->id;
             $url = $article->from_url;
+            echo $url . "\n";
             if (!preg_match("/^http/", $url)) {
                 $url = 'https:' .$url;
             }
@@ -76,7 +76,6 @@ class SpiderArticleDetailCommand extends Command
                 $query = QueryList::getInstance();
                 $document = $query->get($url)->encoding('UTF-8');
                 $content = $document->find("div.content");
-
                 $detail = new SpiderArticleDetail();
                 $detail->id = $id;
                 $detail->content = $content->html();

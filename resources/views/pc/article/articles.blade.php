@@ -8,7 +8,7 @@
                     @foreach($articles as $article)
                         <?php $info = $article->title; ?>
                         <li>
-                            <a class="v" href="{{$article->url}}" title="{{$info}}" target="_blank">{{$info}}</a>
+                            <a class="v" href="/news/{{$article->id}}.html" title="{{$info}}" target="_blank">{{$info}}</a>
                         </li>
                     @endforeach
                 </ul>

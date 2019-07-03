@@ -52,11 +52,11 @@ class AuthController extends Controller
         } else {
             $account->expired_at = date_create('30 min');
         }
-
+        $domain = env("DOMAIN", 'hongdanzhibo.com');
         if ($account->save()) {
             session([AdminAccount::QT_ADMIN_AUTH_SESSION => $account]);//登录信息保存在session
             if ($remember == 1) {
-                $c = cookie(AdminAccount::QT_ADMIN_AUTH_TOKEN, $token, 60 * 24 * 7, '/', 'qiutantiyu.cc', false, true);
+                $c = cookie(AdminAccount::QT_ADMIN_AUTH_TOKEN, $token, 60 * 24 * 7, '/', $domain, false, true);
                 return response()->redirectTo($target)->withCookies([$c]);
             } else {
                 return response()->redirectTo($target);

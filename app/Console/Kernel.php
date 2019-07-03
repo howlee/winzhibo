@@ -57,7 +57,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('live_json_cache:run')->everyMinute();//定时获取所有直播json
-        $schedule->command("sync_video:run --page=1")->everyTenMinutes();//同步录像
+        $schedule->command("sync_video:run --page=1")->everyThirtyMinutes();//同步录像
 
 
 //        $schedule->command('video_json_cache:run')->everyFiveMinutes();//同步录像json
