@@ -65,7 +65,7 @@ class LiveJsonCommands extends Command
                         $status = $match["status"];
                         $time = strtotime($match["time"]);
                         if ($status == -1) {
-                            $cache = "";//Redis::get($key);
+                            $cache = Redis::get($key);
                             if (empty($cache)) {
                                 Match::saveMatch($match);
                                 Redis::setEx($key, 60 * 60 * 4, 1);
