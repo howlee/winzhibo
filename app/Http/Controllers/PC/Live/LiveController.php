@@ -135,23 +135,8 @@ class LiveController extends Controller
         if (!isset($typeArray[$type])) {
             return abort(404);
         }
-
-        $cache = Storage::get('/public/static/json/lives.json');
-        $json = json_decode($cache, true);
-        if (is_null($json) || !isset($json['matches'])) {
-            return abort(404);
-        }
-        $matches = $json['matches'];
-        //获取比赛信息
-
         $sport = $typeArray[$type];
-
-        foreach ($matches as $time=>$matchArray) {
-            if (isset($matchArray[$sport . '_' . $id])) {
-                $match = $matchArray[$sport . '_' . $id];
-                break;
-            }
-        }
+        $match = CommonTool::getMatch($sport, $id);
         if (!isset($match)) {
             return abort(404);
         }
@@ -164,22 +149,8 @@ class LiveController extends Controller
             return abort(404);
         }
 
-        $cache = Storage::get('/public/static/json/lives.json');
-        $json = json_decode($cache, true);
-        if (is_null($json) || !isset($json['matches'])) {
-            return abort(404);
-        }
-        $matches = $json['matches'];
-        //获取比赛信息
-
         $sport = $sportEnArray[$sportCn];
-
-        foreach ($matches as $time=>$matchArray) {
-            if (isset($matchArray[$sport . '_' . $id])) {
-                $match = $matchArray[$sport . '_' . $id];
-                break;
-            }
-        }
+        $match = CommonTool::getMatch($sport, $id);
         if (!isset($match)) {
             return abort(404);
         }
