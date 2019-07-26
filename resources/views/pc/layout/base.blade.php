@@ -6,6 +6,7 @@
     <title>{{empty($title) ? '免费直播_NBA直播' : $title}}-红单直播</title>
     <meta name="keywords" content="{{empty($keywords) ? '足球直播,英超直播,NBA直播,欧冠直播' : $keywords}}">
     <meta name="description" content="{{empty($description) ? '免费的体育直播网站。高清足球直播、NBA直播、英超直播等全部免费看。' : $description}}">
+    <meta name="mobile-agent" content="format=[wml|xhtml|html5]; url={{env("M_HOST", "http://m.hongdanzhibo.com").request()->getRequestUri()}}"/>
     @yield("first_js")
     <script>
         if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
