@@ -45,7 +45,7 @@ function loadVideos() {
                       newsId = data.id;
                       publishAt = data.publish_at;
                       publishAt = publishAt.substr(0, 16);
-                      news_html += '<a href="/m/news/' + newsId + '.html" class="game-item news" style="padding: 10px 20px;">';
+                      news_html += '<a href="'+ window.m +'/news/' + newsId + '.html" class="game-item news" style="padding: 10px 20px;">';
                       news_html += data.title;
                       news_html += '<span>';
                       news_html += '发布时间：' + publishAt + '&nbsp;&nbsp;&nbsp;&nbsp;';
