@@ -58,15 +58,7 @@ class LiveController extends Controller
             $matches = $json['matches'];
             foreach ($matches as $time=>$array) {
                 foreach ($array as $key=>$match) {
-                    $isIm = false;
-                    $channels = $match['channels'];
-                    foreach ($channels as $channel) {
-                        if ($channel['impt'] == 2){
-                            $isIm = true;
-                        }
-                        break;
-                    }
-                    if ($isIm) {
+                    if (isset($match["impt"]) && $match["impt"] == 2) {
                         $imArray[] = $match;
                     }
                 }
