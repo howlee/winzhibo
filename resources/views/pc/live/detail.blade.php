@@ -24,7 +24,7 @@
                 </div>
             </div>
             <div class="box" style="width: 960px;height: 600px;">
-                <iframe style="border: none;" src="{{env("PLAYER_URL")}}/player/{{$match["sport"] . $match["mid"]}}.html" width="100%" height="100%" scrolling="no"></iframe>
+                <iframe style="border: none;" src="{{env("PLAYER_URL")}}/player/{{$match["sport"] . $match["mid"]}}.html" width="100%" height="100%" scrolling="no" allowfullscreen="true"></iframe>
             </div>
             <!--相关比赛-->
             <!--介绍内容-->
