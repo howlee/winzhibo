@@ -13,7 +13,7 @@ return [
     'route' => [
         'name' => '/ueditor/server',
         'options' => [
-//             'middleware' => 'auth',
+            'middleware' => 'dbImgWare',
         ],
     ],
 
