@@ -19,7 +19,7 @@
         </div>
         <div class="game-list" style="display:block;">
             @foreach($news as $item)
-                <a href="{{$m}}/news/{{$item['id']}}.html" class="game-item news" style="padding: 10px 20px;">
+                <a href="{{$m}}/{{$prefix}}/{{$item['id']}}.html" class="game-item news" style="padding: 10px 20px;">
                     {{$item["title"]}}
                     <span>
                         发布时间：{{substr($item['publish_at'], 0, 16)}}&nbsp;&nbsp;&nbsp;&nbsp;
@@ -35,6 +35,7 @@
 @section("js")
     <script type="text/javascript">
         window.m = '{{$m}}';
+        window.tuijian = '{{$prefix == 'tuijian' ? 1 : 0}}';
     </script>
     <script type="text/javascript" src="/js/m/news.js"></script>
 @endsection

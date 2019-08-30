@@ -199,12 +199,12 @@
 
             var type = form.type.value;
             if (type != 12) {//世界杯类型取消限制
-                if ($.trim(form.title.value).length < 11 || $.trim(form.title.value).length > 31) {
-                    toastr.error('标题必须不少于10字符，不能多于30字符');
+                if ($.trim(form.title.value).length < 11 || $.trim(form.title.value).length > 41) {
+                    toastr.error('标题必须不少于10字符，不能多于40字符');
                     return false;
                 }
-                if ($.trim(form.digest.value).length < 31 || $.trim(form.digest.value).length > 100) {
-                    toastr.error('摘要必须不少于30字符，不能多于100字符');
+                if ($.trim(form.digest.value).length < 31 || $.trim(form.digest.value).length > 130) {
+                    toastr.error('摘要必须不少于30字符，不能多于130字符');
                     return false;
                 }
             }

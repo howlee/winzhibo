@@ -3,6 +3,7 @@
 namespace App\Console;
 
 use App\Console\aikq\LiveBreakCommands;
+use App\Console\Article\LGArticleCommand;
 use App\Console\Article\SpiderArticleCommand;
 use App\Console\Article\SpiderArticleDetailCommand;
 use App\Console\commands\LiveDetailHtmlCommands;
@@ -46,6 +47,7 @@ class Kernel extends ConsoleKernel
 
         SpiderArticleCommand::class,//抓取直播吧足球首页文章列表
         SpiderArticleDetailCommand::class,//抓取直播吧足球文章内容
+        LGArticleCommand::class,//抓取竞猜资讯
     ];
 
     /**
@@ -58,6 +60,7 @@ class Kernel extends ConsoleKernel
     {
         $schedule->command('live_json_cache:run')->everyMinute();//定时获取所有直播json
         $schedule->command("sync_video:run --page=1")->everyThirtyMinutes();//同步录像
+        $schedule->command("spider_tuijian:run --page=1")->everyMinute();//同步竞猜文章
 
 
 //        $schedule->command('video_json_cache:run')->everyFiveMinutes();//同步录像json

@@ -116,11 +116,11 @@ class ArticleController extends Controller
         }
 
         if ($type != 12) {
-            if ($title_len < 11 || $title_len > 31) {
-                return response()->json(['code' => 403, 'error' => '标题必须不少于10字符，不能多于30字符']);
+            if ($title_len < 11 || $title_len > 41) {
+                return response()->json(['code' => 403, 'error' => '标题必须不少于10字符，不能多于40字符']);
             }
-            if ($digest_len < 30 || $digest_len > 100) {
-                return response()->json(['code' => 403, 'error' => '摘要必须不少于30字符，不能多于100字符']);
+            if ($digest_len < 30 || $digest_len > 130) {
+                return response()->json(['code' => 403, 'error' => '摘要必须不少于30字符，不能多于130字符']);
             }
         }
 

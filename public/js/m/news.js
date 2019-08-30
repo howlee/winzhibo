@@ -26,7 +26,7 @@ function loadVideos() {
     var hasPage = window.curPage < window.lastPage;
     if (!isLoading && hasPage) {
         window.loadPage = true;
-        var url = window.m + '/news/' + (curPage + 1) + '.json';
+        var url = window.m + '/news/' + (curPage + 1) + '.json?tuijian=' + window.tuijian;
         $.ajax({
             "url": url,
             "dataType": "json",

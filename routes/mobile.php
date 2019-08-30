@@ -27,8 +27,11 @@ Route::group(["namespace" => 'Live'], function () {
 
 
     Route::get("/news/", "LiveController@news");
-    Route::get("/news/{page}.json", "LiveController@newsJson");
     Route::get("/news/{id}.html", "LiveController@newsDetail");
+    Route::get("/news/{page}.json", "LiveController@newsJson");
+
+    Route::get("/tuijian/", "LiveController@tuijian");
+    Route::get("/tuijian/{id}.html", "LiveController@newsDetail");
 });
 
 

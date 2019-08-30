@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset=utf8>
-    <title>{{empty($title) ? '免费直播_NBA直播' : $title}}-红单直播</title>
+    <title>{{empty($title) ? '红单体育直播_足球篮球免费赛事直播,竞彩推荐' : $title}}-红单直播</title>
     <meta name="keywords" content="{{empty($keywords) ? '足球直播,英超直播,NBA直播,欧冠直播' : $keywords}}">
     <meta name="description" content="{{empty($description) ? '免费的体育直播网站。高清足球直播、NBA直播、英超直播等全部免费看。' : $description}}">
     <meta charset="utf-8" >

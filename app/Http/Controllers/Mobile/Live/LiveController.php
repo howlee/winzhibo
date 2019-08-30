@@ -131,19 +131,43 @@ class LiveController extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function news(Request $request) {
-        $news = PcArticle::query()->orderByDesc('publish_at')->paginate(30);
+        $news = PcArticle::query()->where("type", "<>", PcArticle::JC_TYPE)->orderByDesc('publish_at')->paginate(30);
 
         $result['news'] = $news;
         $result['m'] = env('TEST_M', '');
         $result['bar'] = 'zixun';
-
+        $result['prefix'] = 'news';
         CommonTool::addNewsSEO($result);
         return view('mobile.news.index', $result);
     }
 
+    /**
+     * 资讯列表
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function tuijian(Request $request) {
+        $news = PcArticle::query()->where("type", PcArticle::JC_TYPE)->orderByDesc('publish_at')->paginate(30);
+
+        $result['news'] = $news;
+        $result['m'] = env('TEST_M', '');
+        $result['bar'] = 'tuijian';
+        $result['prefix'] = 'tuijian';
+        CommonTool::addTuiJianSEO($result);
+        return view('mobile.news.index', $result);
+    }
+
     public function newsJson(Request $request, $page) {
+        $tuijian = $request->input("tuijian", 0);
         $pageSize = 30;
-        $news = PcArticle::query()->orderByDesc('publish_at')->paginate($pageSize, ['*'], '', $page);
+        $query = PcArticle::query();
+        if ($tuijian) {
+            $query->where("type", PcArticle::JC_TYPE);
+        } else {
+            $query->where("type", "<>",PcArticle::JC_TYPE);
+        }
+        $query->orderByDesc('publish_at');
+        $news = $query->paginate($pageSize, ['*'], '', $page);
 
         $data['news'] = $news->items();
         $data['page'] = ['curPage'=>$news->currentPage(), 'lastPage'=>$news->lastPage(), 'pageSize'=>$pageSize, 'total'=>$news->total()];

@@ -52,7 +52,7 @@ class RouteServiceProvider extends ServiceProvider
      */
     protected function mapWebRoutes()
     {
-        Route::middleware('api')
+        Route::middleware('web')
              ->namespace($this->namespace . '\PC')
              ->group(base_path('routes/pc.php'));
 

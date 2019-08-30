@@ -3,17 +3,17 @@
     <div id="zc_main">
         <div class="left l">
             <div class="list">
-                <h2>热点资讯</h2>
+                <h2>{{$h1}}</h2>
                 <ul>
                     @foreach($articles as $article)
                         <?php $info = $article->title; ?>
                         <li>
-                            <a class="v" href="/news/{{$article->id}}.html" title="{{$info}}" target="_blank">{{$info}}</a>
+                            <a class="v" href="/{{$check}}/{{$article->id}}.html" title="{{$info}}" target="_blank">{{$info}}</a>
                         </li>
                     @endforeach
                 </ul>
             </div>
-            @component('pc.article.list_page_cell', ['page'=>$articles]) @endcomponent
+            @component('pc.article.list_page_cell', ['page'=>$articles, 'prefix'=>$check]) @endcomponent
         </div>
         <div class="right r">
             @if(isset($matches))

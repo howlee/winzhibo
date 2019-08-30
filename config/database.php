@@ -42,7 +42,7 @@ return [
         'qt' => [
             'driver' => 'mysql',
             'host' => env('DB_HOST_QT', '127.0.0.1'),
-            'port' => env('DB_PORT_MATCH_QT', '3306'),
+            'port' => env('DB_PORT_QT', '3306'),
             'database' => env('DB_DATABASE_QT', 'root'),
             'username' => env('DB_USERNAME_QT', 'root'),
             'password' => env('DB_PASSWORD_QT', 'root'),

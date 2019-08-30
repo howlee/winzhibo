@@ -23,13 +23,29 @@ class ArticleController extends Controller
 
     public function news(Request $request, $page = 1) {
         $query = PcArticle::query()->where('status', PcArticle::kStatusPublish)->orderByDesc('publish_at');
+        $query->where("type", "<>", PcArticle::JC_TYPE);
         $articles = $query->paginate(self::PAGE_SIZE, ['*'], '', $page);
 
         $result["articles"] = $articles;
         $result['matches'] = LiveController::getLiveMatches();
         $result['check'] = "news";
-
+        $result['h1'] = '热点资讯';
         CommonTool::addNewsSEO($result);
+        return view('pc.article.articles', $result);
+    }
+
+
+    public function tuijian(Request $request, $page = 1) {
+        $query = PcArticle::query()->where('status', PcArticle::kStatusPublish)->orderByDesc('publish_at');
+        $query->where("type", "=", PcArticle::JC_TYPE);
+        $articles = $query->paginate(self::PAGE_SIZE, ['*'], '', $page);
+
+        $result["articles"] = $articles;
+        $result['matches'] = LiveController::getLiveMatches();
+        $result['check'] = "tuijian";
+        $result['h1'] = '红单推荐';
+
+        CommonTool::addTuiJianSEO($result);
         return view('pc.article.articles', $result);
     }
 

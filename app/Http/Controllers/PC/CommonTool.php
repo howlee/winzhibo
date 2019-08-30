@@ -262,6 +262,12 @@ class CommonTool
         $result['description'] = '红单体育为您提供最新最快的NBA新闻、英超新闻、西甲新闻、中超新闻，体育新闻应有尽有。';
     }
 
+    public static function addTuiJianSEO(array &$result) {
+        $result['title'] = "红单推荐";
+        $result['keywords'] = 'NBA新闻,英超新闻,中超新闻,体育新闻';
+        $result['description'] = '红单体育为您提供最新最快的NBA新闻、英超新闻、西甲新闻、中超新闻，体育新闻应有尽有。';
+    }
+
 
     /**
      * 直播终端title、keywords、description

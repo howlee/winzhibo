@@ -14,7 +14,7 @@ use Illuminate\Database\Eloquent\Model;
 class PcArticle extends Model
 {
     public $connection = "qt";
-
+    const JC_TYPE = 110;
     const kStatusPublish = 1;
 
     public function detail() {

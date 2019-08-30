@@ -3,7 +3,7 @@
 <head>
     @yield("meta")
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>{{empty($title) ? '免费直播_NBA直播' : $title}}-红单直播</title>
+    <title>{{empty($title) ? '红单体育直播_足球篮球免费赛事直播,竞彩推荐' : $title}}-红单直播</title>
     <meta name="keywords" content="{{empty($keywords) ? '足球直播,英超直播,NBA直播,欧冠直播' : $keywords}}">
     <meta name="description" content="{{empty($description) ? '免费的体育直播网站。高清足球直播、NBA直播、英超直播等全部免费看。' : $description}}">
     <meta name="mobile-agent" content="format=[wml|xhtml|html5]; url={{env("M_HOST", "http://m.hongdanzhibo.com").request()->getRequestUri()}}"/>
@@ -21,7 +21,7 @@
             }
             url = url.replace(/(https?:\/\/)(www\.)?/, "$1m.");
             window.location.href = url;
-      }
+        }
     </script>
     <link rel="Shortcut Icon" data-ng-href="{{env('CDN_URL')}}/img/ico.ico" href="{{env('CDN_URL')}}/img/ico.ico">
     <link href="{{env('CDN_URL')}}/css/pc/style.css" type="text/css" rel="stylesheet" />
@@ -39,7 +39,7 @@
                 <li><a href="/zuqiu/"@if(isset($check) && $check == 'football') class="f" @endif >足球直播</a></li>
                 <li><a href="/nba/"@if(isset($check) && $check == 'basketball') class="f" @endif >篮球直播</a></li>
                 <li><a href="/news/" @if(isset($check) && $check == 'news') class="f" @endif>热点资讯</a></li>
-                {{--<li><a href="http://www.qqzhibo.net/video/lanqiu/">篮球视频</a></li>--}}
+                <li><a href="/tuijian/" @if(isset($check) && $check == 'tuijian') class="f" @endif>红单推荐</a></li>
                 <li><a href="/video/" @if(isset($check) && $check == 'video') class="f" @endif>综合视频</a></li>
                 {{--<li id="ad_text_nav"><a href="http://www.qqzhibo.net/live/shijiebei/">世界杯直播</a></li>--}}
             </ul>

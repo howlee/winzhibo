@@ -142,6 +142,24 @@ ul, ol {
     background-size:25px 25px;
     margin:auto;
 }
+.container .wrap .footer-bar a .tuijian-on{
+    margin-top:10px;
+    width:25px;
+    height: 25px;
+    display:block;
+    background:url(/img/mobile/tuijian-on.png) no-repeat;
+    background-size:25px 25px;
+    margin:auto;
+}
+.container .wrap .footer-bar a .tuijian{
+    margin-top:10px;
+    width:25px;
+    height: 25px;
+    display:block;
+    background:url(/img/mobile/tuijian.png) no-repeat;
+    background-size:25px 25px;
+    margin:auto;
+}
 .container .wrap .footer-bar a .lanqiu-on{
     margin-top:10px;
     width:25px;

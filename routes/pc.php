@@ -41,6 +41,10 @@ Route::group(["namespace" => 'Article'], function () {
     Route::get("/news/index{page}.html", "ArticleController@news");
     Route::get("/news/{id}.html", "ArticleController@detail");
 
+    Route::get("/tuijian", "ArticleController@tuijian");
+    Route::get("/tuijian/index{page}.html", "ArticleController@tuijian");
+    Route::get("/tuijian/{id}.html", "ArticleController@detail");
+
     //Route::get("/static/news/{id}", "ArticleController@generateHtml");
 });
 
