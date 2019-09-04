@@ -60,7 +60,7 @@ class Kernel extends ConsoleKernel
     {
         $schedule->command('live_json_cache:run')->everyMinute();//定时获取所有直播json
         $schedule->command("sync_video:run --page=1")->everyThirtyMinutes();//同步录像
-        $schedule->command("spider_tuijian:run --page=1")->everyMinute();//同步竞猜文章
+        $schedule->command("spider_tuijian:run --page=1")->everyThirtyMinutes();//同步竞猜文章
 
 
 //        $schedule->command('video_json_cache:run')->everyFiveMinutes();//同步录像json
